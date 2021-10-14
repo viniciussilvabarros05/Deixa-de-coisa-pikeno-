@@ -1,0 +1,19 @@
+header{
+    height:50vh;
+    width: 100%;
+    background-color: var(--mostarda);
+ 
+
+    div{
+        background-color:var(--preto-cinza);
+        height: 50px;
+        width: 100%;
+        box-shadow: 1px 1px 3px 2px rgba(0,0,0,0.3);
+    }
+    
+    img{
+        width: 25%;
+        margin-top: 20px;
+    }
+}
+
