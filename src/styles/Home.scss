@@ -1,9 +1,125 @@
-.menu-lateral{
-    height:100%;
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-lateral {
+    height: 100%;
     width: 250px;
+    padding-right: 10px;
     background-color: var(--vinho);
     color: white;
-    position:absolute;
+    position: fixed;
     top: 0;
-    
+
+    img {
+        margin-top: 10px;
+        width: 100px;
+    }
+
+    .menu-hamburguer {
+        height: 50px;
+        position: absolute;
+
+        margin-top: 15px;
+        right: 15px;
+
+        div {
+            height: 2px;
+            margin: 8px;
+            background-color: white;
+            width: 25px;
+        }
+    }
+
+    .menu-links {
+        display: flex;
+        width: 60%;
+
+        flex-direction: column;
+        text-align: justify;
+        margin: auto;
+        margin-top: 20px;
+
+        a {
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            font-size: 25px;
+            text-decoration: none;
+
+            color: white;
+
+            img {
+                max-width: 35px;
+                height: 25px;
+                margin-right: 15px;
+            }
+            &:not(:first-child) {
+                margin-top: 10px;
+            }
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            border-top: white 1px solid;
+
+            a {
+                margin-left: -25px;
+            }
+        }
+    }
+}
+
+.bem-vindo {
+    margin-top: 100px;
+
+    color: var(--preto-cinza);
+    h1 {
+        font-size: 100px;
+        font-weight: 300;
+    }
+    h3 {
+        font-size: 35px;
+        font-weight: 300;
+    }
+}
+
+.bar-cardapio {
+    width: 60%;
+    margin: auto;
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+        width: 75px;
+    }
+
+    .point {
+        width: 15px;
+        height: 15px;
+        background-color: #fff;
+        border-radius: 50%;
+    }
+}
+
+.cardapio {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 100px 0 50px 0;
+    width: 100%;
+    gap: 15px;
+    background-color: var(--vinho);
+    margin-top: 50px;
 }
