@@ -1,8 +1,17 @@
+@font-face {
+    font-family: holyfat;
+    src: url("../fonts/Holyfat.ttf") format("truetype");
+}
+
 :root {
     --mostarda: #E69232;
     --preto-cinza: #231F20;
     --vinho: #A31E23;
     --creme: #D0C4AD;
+  }
+
+  *{
+      font-family: holyfat, "sans-serif", Verdana, Geneva, Tahoma, sans-serif;
   }
 
   html{

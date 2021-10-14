@@ -9,6 +9,7 @@ export function Header(){
             <div>
               <img src={Logo}/>
             </div>
+          
         </header>
     )
 }
