@@ -2,15 +2,20 @@ import React from "react"
 import "../styles/Header.scss"
 
 import Logo from "../assets/images/Logo.svg"
-export function Header(){
+export function Header(props) {
 
-    return(
+    return (
         <header>
-           
+
             <div>
-              <img src={Logo}/>
+                <div  onClick = {()=>{props.setMenu(true)}}className="menu-hamburguer">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <img src={Logo} />
             </div>
-          
+
         </header>
     )
 }

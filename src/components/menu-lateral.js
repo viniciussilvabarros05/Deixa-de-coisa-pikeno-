@@ -12,29 +12,39 @@ import Contatos from "../assets/images/Contatos.svg"
 import Pedidos from "../assets/images/Pedidos.svg"
 
 import Sobre from "../assets/images/Sobre.svg"
+import { useState } from "react"
 
-export function MenuLateral() {
+
+
+export function MenuLateral(props) {
+   
+
+
 
     return (
-        <div className="menu-lateral">
-            <div className="menu-hamburguer">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <img src={LogoBorder} />
-            <nav className="menu-links">
-                <a href="#"><img src ={Home}/>HOME</a>
-                <a href="#"><img src ={Menu}/>CARDAPIO</a>
-                <a href="#"><img src ={Pedidos}/>PEDIDOS</a>
-                <a href="#"><img src ={Contatos}/>CONTATOS</a>
-                <a href="#"><img src ={Sobre}/>SOBRE</a>
+        <>
+            {props.Menu == true? 
+            <div onClick = {()=>props.setMenu(false)} className="menu-lateral">
+                <div className="menu-hamburguer">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <img src={LogoBorder} />
+                <nav className="menu-links">
+                    <a href="#"><img src={Home} />HOME</a>
+                    <a href="#"><img src={Menu} />CARDAPIO</a>
+                    <a href="#"><img src={Pedidos} />PEDIDOS</a>
+                    <a href="#"><img src={Contatos} />CONTATOS</a>
+                    <a href="#"><img src={Sobre} />SOBRE</a>
 
-                <div> <a href="#"><img src ={Carrinho}/>CARRINHO</a></div>
-            </nav>
+                    <div> <a href="#"><img src={Carrinho} />CARRINHO</a></div>
+                </nav>
 
 
 
-        </div>
+            </div>:""}
+
+        </>
     )
 }

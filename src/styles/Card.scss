@@ -1,29 +1,68 @@
 .card {
-    width: 17vw;
-    min-width: 150px;
-    height: 380px;
-    border-radius: 35px;
+    width: 16vw;
+    min-width: 250px;
+    padding-bottom: 12px;
+    border-radius: 45px;
     font-size: 30px;
+    position: relative;
+    box-sizing: border-box;
 
     background-color: var(--mostarda);
 
+    .name {
+        color: white;
+        font-size: 35px;
+        margin-bottom: 15px;
+      span{
+          color: var(--vinho);
+      }
+    }
+
     img:first-child {
         width: 100%;
-        max-height: 50%;
-
+        max-height: 60%;
+        margin-top: -1px;
         min-width: 150px;
     }
 
-    img{
+    img {
         width: 60px;
         margin-top: -50px;
     }
 
-    ul{
-        width: 50%;
+    ul {
+        font-size: 35px;
+        text-align: start;
+        width: 40%;
+        margin-left: 16%;
     }
-    button{
+    button {
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60%;
+       
+        font-size: 35px;
+        margin-top: 25px;
+        height: 65px;
 
+
+        background-color: var(--vinho);
+        color: white;
+
+
+        border: none;
+        border-radius: 50px;
     }
 }
 
+@media  screen and (max-width: 700px) {
+    .card{
+       
+        height: 500px;
+        ul{
+            font-size: 30px;
+        }
+    }
+}

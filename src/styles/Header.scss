@@ -3,8 +3,22 @@ header{
     width: 100%;
     background-color: var(--mostarda);
  
+    .menu-hamburguer {
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        left: 15px;
 
-    div{
+        div {
+            height: 2px;
+            margin: 8px;
+            background-color: white;
+            width: 25px;
+            
+        }
+    }
+
+   >div{
         background-color:var(--preto-cinza);
         height: 50px;
         width: 100%;
@@ -14,7 +28,7 @@ header{
     img{
       
         max-width: 25%;
-        min-width: 150px;
+        min-width: 250px;
         margin-top: 20px;
     }
 }

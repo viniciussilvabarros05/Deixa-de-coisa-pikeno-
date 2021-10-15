@@ -19,3 +19,35 @@
       background-position: center;
       background-size: cover;
   }
+
+  footer{
+      width: 100%;
+      padding: 50px 0 0 0;
+      color: white;
+      font-size: 25px;
+      background-color: var(--vinho);
+
+      .contatos{
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          width: 100%;
+          margin-bottom: 5vw;
+          flex-wrap: wrap;
+          gap:20px;
+
+          div{
+              display: flex;
+              align-items: center;
+              text-align: justify;
+              gap: 15px;
+              width:250px;
+          }
+      }
+
+      .bar-footer{
+          width: 100%;
+          height: 50px;
+          background-color:var(--preto-cinza);
+      }
+  }

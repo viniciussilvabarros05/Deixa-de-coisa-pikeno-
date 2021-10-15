@@ -7,16 +7,19 @@ export function Card() {
             <div className='card'>
                 <img src={teste}></img>
                 <img src={hamburguer}></img>
-                <div>hamburguer____ R$ 20,00</div>
-            
+                <div className = "name">hamburguer____<span>R$ 20,00</span> </div>
+               
                     <ul>
-                        <li> Carne 220g</li>
-                        <li> Alface, Cebola</li>
+                        <li>Carne 220g</li>
+                        <li>Alface</li>
+                        <li>Cebola</li>
                         <li>Ovo, Queijo</li>
                     </ul>
-                   
-               
-                <button></button>
+              
+
+
+
+                <button>PEDIR AGORA!</button>
             </div>
         </div>
 
