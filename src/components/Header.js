@@ -8,7 +8,8 @@ export function Header(props) {
         <header>
 
             <div>
-                <div  onClick = {()=>{props.setMenu(true)}}className="menu-hamburguer">
+                <div  onClick = {()=>{props.setMenu(true)
+                console.log(props.Menu)}}className="menu-hamburguer">
                     <div></div>
                     <div></div>
                     <div></div>

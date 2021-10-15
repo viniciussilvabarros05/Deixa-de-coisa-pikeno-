@@ -1,17 +1,20 @@
 
 import './App.css';
-import { MenuLateral } from './components/menu-lateral';
-
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { Home } from './Pages/Home';
 
 import "./styles/Global.scss"
 function App() {
   return (
+
     <div className="App">
-    <Home></Home>
-    
+      <BrowserRouter>
+        <Route Path="/" component={Home} />
+      </BrowserRouter>
+
+
     </div>
-  );
+  )
 }
 
 export default App;

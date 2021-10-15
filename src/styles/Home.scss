@@ -4,20 +4,24 @@
     margin: 0;
 }
 
-@keyframes menuLateral{
-    0%{
+@keyframes menuLateral {
+    0% {
         opacity: 0;
         left: -250px;
     }
 
-    100%{
+    100% {
         opacity: 1;
         left: 0;
     }
 }
-
+.menuExposed {
+    display: block;
+    visibility: visible;
+}
 .menu-lateral {
     height: 100%;
+    
     width: 250px;
     padding-right: 10px;
     background-color: var(--vinho);
@@ -25,7 +29,8 @@
     position: fixed;
     top: 0;
     z-index: 1;
-    animation: menuLateral 0.3s linear 1 backwards ;
+   
+    animation: menuLateral 0.3s linear 1 backwards;
 
     .menu-hamburguer {
         height: 50px;
@@ -142,44 +147,39 @@
 .ofertas {
     overflow: hidden;
     display: flex;
- 
+
     position: relative;
 
     margin-top: 50px;
     margin-bottom: 500px;
-   
+
     width: 100%;
     min-height: 475px;
     background-color: var(--mostarda);
 
-    .descrição{
+    .descrição {
         flex: 1;
         position: relative;
         height: 100%;
         > img {
-            
             width: 60vw;
             height: 100%;
             min-width: 850px;
             margin-right: -120px;
-            
         }
     }
-    
 
     .content-produto {
-       flex: 0.5;
-       
+        flex: 0.5;
+
         align-self: center;
 
-       
         > img {
             width: 90%;
             margin: auto;
-            
+
             max-height: 600px;
-          
-           
+
             border-radius: 50px;
         }
     }
@@ -189,7 +189,7 @@
         width: 40%;
         height: 5vw;
         margin-top: 100px;
-        
+
         flex-direction: column;
         align-items: center;
         position: absolute;
@@ -205,7 +205,7 @@
         .name {
             color: white;
             font-size: 3vw;
-          
+
             margin-left: 30px;
             margin-bottom: 50px;
             span {
@@ -213,15 +213,15 @@
             }
         }
 
-        button{
+        button {
             font-size: 2vw;
             padding: 15px;
             border-radius: 50px;
-            border:none;
+            border: none;
             background-color: var(--mostarda);
             color: white;
-            margin-left:-150px;
-          
+            margin-left: -150px;
+
             width: 300px;
         }
     }
@@ -236,74 +236,63 @@
 }
 
 @media screen and (max-width: 1070px) {
-    .ofertas{
-        
+    .ofertas {
         display: flex;
         flex-direction: column;
-        .content-produto{
+        .content-produto {
             margin-top: 50px;
             width: 100%;
-           
         }
-        .descrição-ofertas{
+        .descrição-ofertas {
             position: absolute;
             bottom: 400px;
-            .name{
+            .name {
                 font-size: 5vw;
             }
-            ul{
+            ul {
                 font-size: 5vw;
             }
         }
-        .descrição{
-            >img{
+        .descrição {
+            > img {
                 margin-right: -250px;
-                
             }
         }
     }
 }
 
 @media screen and (max-width: 510px) {
-    .ofertas{
-        
+    .ofertas {
         display: flex;
         flex-direction: column;
-        .content-produto{
-           
-            >img{
-             
+        .content-produto {
+            > img {
                 width: 100%;
-
             }
         }
-        .descrição-ofertas{
+        .descrição-ofertas {
             position: absolute;
             bottom: 400px;
             right: 0;
-            
-            .name{
+
+            .name {
                 width: 250px;
                 margin-left: -80px;
                 font-size: 8vw;
             }
-            ul{
-                font-size: 8vw;           
+            ul {
+                font-size: 8vw;
             }
-            button{
+            button {
                 font-size: 10vw;
-                
             }
         }
-        .descrição{
-            
+        .descrição {
             width: 80%;
             margin: auto;
-            >img{
+            > img {
                 margin-left: -150px;
-                
             }
         }
     }
 }
-    

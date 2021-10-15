@@ -23,8 +23,8 @@ export function Home() {
 
     return (
         <>
-            <Header setMenu = {setMenuResponsive}></Header>
-            { menuResponsive ? <MenuLateral setMenu = {setMenuResponsive} Menu = {menuResponsive}></MenuLateral>: ""}
+            <Header Menu = {menuResponsive}setMenu = {setMenuResponsive}></Header>
+             <MenuLateral setMenu = {setMenuResponsive} Menu = {menuResponsive}></MenuLateral>
             <main>
                 <div className="bem-vindo">
                     <h1>BEM VINDOS</h1>

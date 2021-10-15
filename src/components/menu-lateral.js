@@ -12,7 +12,7 @@ import Contatos from "../assets/images/Contatos.svg"
 import Pedidos from "../assets/images/Pedidos.svg"
 
 import Sobre from "../assets/images/Sobre.svg"
-import { useState } from "react"
+
 
 
 
@@ -24,8 +24,8 @@ export function MenuLateral(props) {
     return (
         <>
             {props.Menu == true? 
-            <div onClick = {()=>props.setMenu(false)} className="menu-lateral">
-                <div className="menu-hamburguer">
+            <div  className="menu-lateral">
+                <div onClick = {()=>props.setMenu(false)} className="menu-hamburguer">
                     <div></div>
                     <div></div>
                     <div></div>
