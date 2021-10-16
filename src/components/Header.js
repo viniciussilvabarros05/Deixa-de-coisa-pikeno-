@@ -14,8 +14,10 @@ export function Header(props) {
                     <div></div>
                     <div></div>
                 </div>
-                <img src={Logo} />
+                
             </div>
+            <img src={Logo} />
+            
 
         </header>
     )
