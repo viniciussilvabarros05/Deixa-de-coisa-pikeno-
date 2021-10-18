@@ -5,9 +5,12 @@ import { Home } from './Pages/Home';
 import { createStore, combineReducers } from "redux"
 import { Provider } from "react-redux"
 import "./styles/Global.scss"
+import menuLateral from './reducers/menuLateralReducer';
 function App() {
-  const allReducers = combineReducers({})
-  const store = createStore()
+
+  const allReducers = combineReducers({menuLateral: menuLateral
+                                        })
+  const store = createStore(allReducers)
   return (
 
     <div className="App">

@@ -13,18 +13,17 @@ import fundoOfertas from "../assets/images/fundoOfertas.svg"
 
 import teste2 from "../assets/images/teste2.jpg"
 import { Footer } from "../components/Footer";
-import { useState } from "react";
-
+import { useSelector } from "react-redux";
 
 export function Home() {
 
-    const [menuResponsive, setMenuResponsive] = useState(false)
+    const menuLateral = useSelector(state => { return state.menuLateral })
 
 
     return (
         <>
-            <Header Menu = {menuResponsive}setMenu = {setMenuResponsive}></Header>
-             <MenuLateral setMenu = {setMenuResponsive} Menu = {menuResponsive}></MenuLateral>
+            <Header></Header>
+            <MenuLateral></MenuLateral> 
             <main>
                 <div className="bem-vindo">
                     <h1>BEM VINDOS</h1>
@@ -56,8 +55,8 @@ export function Home() {
                 </div>
 
                 <div className="ofertas">
-                    <div className = "content-produto"><img src={teste2} /></div>
-                   <div className= "descrição"><img src={fundoOfertas}></img></div> 
+                    <div className="content-produto"><img src={teste2} /></div>
+                    <div className="descrição"><img src={fundoOfertas}></img></div>
                     <div className="descrição-ofertas">
                         <div className="name">hamburguer____<span>R$ 20,00</span></div>
 

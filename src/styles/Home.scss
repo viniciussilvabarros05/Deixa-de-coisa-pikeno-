@@ -6,22 +6,40 @@
 
 @keyframes menuLateral {
     0% {
-        opacity: 0;
         left: -250px;
+        opacity: 0;
     }
 
     100% {
         opacity: 1;
         left: 0;
+        position: fixed;
+    }
+}
+@keyframes menuLateralback {
+    0% {
+        left:0;
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        left: -250px;
+        
     }
 }
 .menuExposed {
-    display: block;
-    visibility: visible;
+    
+    animation: menuLateral 0.3s linear 1  forwards;
+
+}
+.menuhidden {
+    
+    animation: menuLateralback 0.2s linear 1 forwards;
+
 }
 .menu-lateral {
     height: 100%;
-    
     width: 250px;
     padding-right: 10px;
     background-color: var(--vinho);
@@ -29,8 +47,11 @@
     position: fixed;
     top: 0;
     z-index: 1;
+    
+    
+    
    
-    animation: menuLateral 0.3s linear 1 backwards;
+   
 
     .menu-hamburguer {
         height: 50px;

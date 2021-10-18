@@ -12,20 +12,26 @@ import Contatos from "../assets/images/Contatos.svg"
 import Pedidos from "../assets/images/Pedidos.svg"
 
 import Sobre from "../assets/images/Sobre.svg"
+import { useDispatch, useSelector } from "react-redux"
+
+import { menuActived, menuDisable } from "../actions/actionList"
 
 
+export function MenuLateral() {
 
+    const dispatch = useDispatch()
 
-export function MenuLateral(props) {
-   
+    const menuLateral = useSelector(state => { return state.menuLateral })
 
-
-
+    function MenuDisable() {
+        dispatch(menuDisable())
+        console.log(menuLateral)
+    }
     return (
         <>
-            {props.Menu == true? 
-            <div  className="menu-lateral">
-                <div onClick = {()=>props.setMenu(false)} className="menu-hamburguer">
+
+            <div className={`menu-lateral ${menuLateral?"menuExposed": "menuhidden"}`}>
+                <div onClick={MenuDisable} className="menu-hamburguer">
                     <div></div>
                     <div></div>
                     <div></div>
@@ -43,7 +49,7 @@ export function MenuLateral(props) {
 
 
 
-            </div>:""}
+            </div>
 
         </>
     )
