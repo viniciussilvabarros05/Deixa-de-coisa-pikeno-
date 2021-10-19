@@ -18,11 +18,13 @@
 }
 @keyframes menuLateralback {
     0% {
+        
         left:0;
         opacity: 1;
     }
 
     100% {
+        
         opacity: 0;
         left: -250px;
         
@@ -36,6 +38,7 @@
 .menuhidden {
     
     animation: menuLateralback 0.2s linear 1 forwards;
+    visibility: hidden;
 
 }
 .menu-lateral {
@@ -45,6 +48,8 @@
     background-color: var(--vinho);
     color: white;
     position: fixed;
+    transition: visibility 0.2s;
+    
     top: 0;
     z-index: 1;
     
