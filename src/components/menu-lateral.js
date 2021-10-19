@@ -1,5 +1,5 @@
 import LogoBorder from "../assets/images/BorderLogo.png"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 import Carrinho from "../assets/images/Carrinho.svg"
 
@@ -30,7 +30,7 @@ export function MenuLateral() {
     return (
         <>
 
-            <div className={`menu-lateral ${menuLateral?"menuExposed": "menuhidden"}`}>
+            <div className={`menu-lateral ${menuLateral ? "menuExposed" : "menuhidden"}`}>
                 <div onClick={MenuDisable} className="menu-hamburguer">
                     <div></div>
                     <div></div>
@@ -38,13 +38,31 @@ export function MenuLateral() {
                 </div>
                 <img src={LogoBorder} />
                 <nav className="menu-links">
-                    <a href="#"><img src={Home} />HOME</a>
-                    <a href="#"><img src={Menu} />CARDAPIO</a>
-                    <a href="#"><img src={Pedidos} />PEDIDOS</a>
-                    <a href="#"><img src={Contatos} />CONTATOS</a>
-                    <a href="#"><img src={Sobre} />SOBRE</a>
+                    <NavLink activeClassName="ActivedMenu" to="/Home"><img src={Home} />HOME</NavLink>
 
-                    <div> <a href="#"><img src={Carrinho} />CARRINHO</a></div>
+
+                    <NavLink activeClassName="ActivedMenu"
+                     
+                     to="/cardapio"><img src={Menu} />CARDAPIO</NavLink>
+
+
+                    <NavLink activeClassName="ActivedMenu"
+                  
+                     to="/pedidos"><img src={Pedidos} />PEDIDOS</NavLink>
+
+
+                    <NavLink activeClassName="ActivedMenu"
+                   
+                     to="/contatos"><img src={Contatos} />CONTATOS</NavLink>
+
+
+                    <NavLink activeClassName="ActivedMenu"
+                     
+                     to="/sobre"><img src={Sobre} />SOBRE</NavLink>
+
+                    <div> <NavLink activeClassName="ActivedMenu"
+                     
+                     to="/carrinho"><img src={Carrinho} />CARRINHO</NavLink></div>
                 </nav>
 
 

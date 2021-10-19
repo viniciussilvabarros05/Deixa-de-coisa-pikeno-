@@ -23,7 +23,7 @@ export function Home() {
     return (
         <>
             <Header></Header>
-            <MenuLateral></MenuLateral> 
+         
             <main>
                 <div className="bem-vindo">
                     <h1>BEM VINDOS</h1>
