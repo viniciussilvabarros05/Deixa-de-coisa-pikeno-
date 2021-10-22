@@ -14,3 +14,8 @@ export function menuDisable() {
 
 
 }
+
+export function parsedMenuBar(i){
+    let types= i
+    return ({type: 'PARSE', payload : types})
+}

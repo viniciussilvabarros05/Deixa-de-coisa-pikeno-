@@ -15,19 +15,42 @@ import { cardapio } from "../services/cardapio";
 
 import teste2 from "../assets/images/teste2.jpg"
 import { Footer } from "../components/Footer";
-import {useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { parsedMenuBar } from "../actions/actionList";
 export function Home() {
 
-    
+
     const dispatch = useDispatch()
+
     const [payment, setPayment] = useState(false)
+
+    const [animation, setAnimation] = useState(false)
+
+
+    let type_produtos = useSelector(state => { return (state.parsedMenuBar) })
+
+   async function parseItemsMenu(i) {
+        if(type_produtos === i){
+            return
+        }
+        setAnimation(true)
+
+       await setTimeout(()=>dispatch(parsedMenuBar(i)), 950)
+        setTimeout(() => { setAnimation(false) }, 1400)
+
+
+
+    }
+
+
+
 
     return (
         <div>
             <Header></Header>
-         
+
             <main>
                 <div className="bem-vindo">
                     <h1>BEM VINDOS</h1>
@@ -36,25 +59,23 @@ export function Home() {
 
 
                 <div className="bar-cardapio">
-                    <img src={Hamburguer} />
+                    <img onClick={() => parseItemsMenu("hamburgueres")} src={Hamburguer} />
                     <div className="point"></div>
-                    <img src={Combo} />
+                    <img onClick={() => parseItemsMenu("combos")} src={Combo} />
                     <div className="point"></div>
-                    <img src={Bolo} />
+                    <img onClick={() => parseItemsMenu("doces")} src={Bolo} />
                     <div className="point"></div>
-                    <img src={Batata} />
+                    <img onClick={() => parseItemsMenu("batatas")} src={Batata} />
                     <div className="point"></div>
-                    <img src={Garrafa} />
+                    <img onClick={() => parseItemsMenu("bebidas")} src={Garrafa} />
                 </div>
 
 
                 <div className="cardapio">
-                    <Card setPayment = {setPayment}></Card>
-                    <Card setPayment = {setPayment}></Card>
-                    <Card setPayment = {setPayment}></Card>
-                    <Card setPayment = {setPayment}></Card>
+                    <Card animation={animation} setAnimation={setAnimation} setPayment={setPayment}></Card>
+
                 </div>
-                
+
                 <div className="bem-vindo">
                     <h1>OFERTAS DO DIA!</h1>
                 </div>
@@ -75,12 +96,12 @@ export function Home() {
 
 
 
-                        <button onClick = {()=>setPayment(true)}>PEDIR AGORA!</button>
+                        <button onClick={() => setPayment(true)}>PEDIR AGORA!</button>
                     </div>
                 </div>
 
             </main>
-            { payment? <PaymentView setPayment = {setPayment}></PaymentView>: "" }
+            {payment ? <PaymentView setPayment={setPayment}></PaymentView> : ""}
             <Footer></Footer>
         </div>
     )

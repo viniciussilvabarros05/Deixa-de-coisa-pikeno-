@@ -1,5 +1,16 @@
+.content-card{
+    
+    display: flex;
+    gap: 45px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
 .card {
+ 
     width: 16vw;
+    min-height: 511px;
     min-width: 250px;
     padding-bottom: 12px;
     border-radius: 45px;
@@ -42,6 +53,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        right: 0;
         width: 60%;
        
         font-size: 35px;

@@ -2,31 +2,49 @@ import "../styles/Card.scss"
 import teste from "../assets/images/teste1.png"
 import hamburguer from "../assets/images/Hamburguer.svg"
 import { cardapio } from "../services/cardapio"
+import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
 
 export function Card(props) {
 
-    const { type, name, desc, value, img } = cardapio.hamburgueres[0]
+    
 
-    let currencyValue = value.toLocaleString("pt-br", {style:"currency", currency:"brl"})
 
+    let type_produtos = useSelector(state => {return (state.parsedMenuBar) })
+    const cardapioProdutos = Object.getOwnPropertyDescriptor(cardapio, type_produtos)
+
+    
+
+    
+    function handleValue(value) {
+        return value.toLocaleString("pt-br", { style: "currency", currency: "brl" })
+
+    }
+
+    console.log(type_produtos)
 
     return (
-        <div>
-            <div className='card'>
-                <img src={img}></img>
-                <img src={type}></img>
-                <div className="name">{name}____<span>{currencyValue}</span> </div>
+        <div className = "content-card">{cardapioProdutos.value.map((item, index) => {
+            return (
+                <div key={index} className={`card ${props.animation? "animation-cardapio" : ''}`}>
+                    <img src={item.img}></img>
+                    <img src={item.type}></img>
+                    <div className="name">{item.name}____<span>{handleValue(item.value)}</span> </div>
 
-                <ul>
-                    { desc.map((item=>{
-                        console.log(item)
-                        return (<li>{item}</li>)
-                    }))}
-                </ul>
+                    <ul>
+                        {item.desc.map((items, id) => {
 
-                <button onClick={() => props.setPayment(true)}>PEDIR AGORA!</button>
-            </div>
-        </div>
+                            return (<li key={id}>{items}</li>)
+                        })}
+                    </ul>
+
+                    <button onClick={() => props.setPayment(true)}>PEDIR AGORA!</button>
+                </div>
+            )
+        }
+        )
+
+        } </div>
 
     )
 }

@@ -3,7 +3,34 @@
     padding: 0;
     margin: 0;
 }
+@keyframes cardapio {
 
+    0%{
+        left:0;
+        
+    }
+    50%{
+        left: 100vw;
+        opacity: 0;
+    }
+    75%{
+        left: -200vw;
+        opacity: 0;
+    }
+
+    100%{
+        left: 0;
+        opacity: 1;
+    }
+
+
+    
+}
+
+.animation-cardapio{
+    animation: cardapio 1s 1 forwards ease-in ;
+    
+}
 @keyframes menuLateral {
     0% {
         left: -250px;
@@ -188,6 +215,7 @@
     gap: 15px;
     background-color: var(--vinho);
     margin-top: 50px;
+    overflow: hidden;
 }
 
 .ofertas {

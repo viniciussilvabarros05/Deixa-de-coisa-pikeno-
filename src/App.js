@@ -11,14 +11,14 @@ import { Provider } from "react-redux"
 import "./styles/Global.scss"
 import menuLateral from './reducers/menuLateralReducer';
 import { MenuLateral } from './components/menu-lateral';
+import ParseMenu  from './reducers/menuBar';
 
 function App() {
 
-  
-
 
   const allReducers = combineReducers({
-    menuLateral: menuLateral
+    menuLateral: menuLateral,
+    parsedMenuBar: ParseMenu
   })
   const store = createStore(allReducers)
   return (
