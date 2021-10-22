@@ -28,7 +28,8 @@
 }
 
 .animation-cardapio{
-    animation: cardapio 1s 1 forwards ease-in ;
+    animation: cardapio 1.1s 1 forwards cubic-bezier(.65,-0.81,.55,1.16)
+    ;
     
 }
 @keyframes menuLateral {

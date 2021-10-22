@@ -38,7 +38,7 @@ export function Home() {
         setAnimation(true)
 
        await setTimeout(()=>dispatch(parsedMenuBar(i)), 950)
-        setTimeout(() => { setAnimation(false) }, 1400)
+        setTimeout(() => { setAnimation(false) }, 1700)
 
 
 

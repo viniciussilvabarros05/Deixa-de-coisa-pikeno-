@@ -24,9 +24,9 @@ export function Card(props) {
     console.log(type_produtos)
 
     return (
-        <div className = "content-card">{cardapioProdutos.value.map((item, index) => {
+        <div className ={`content-card ${props.animation? "animation-cardapio" : ''}`}>{cardapioProdutos.value.map((item, index) => {
             return (
-                <div key={index} className={`card ${props.animation? "animation-cardapio" : ''}`}>
+                <div key={index} className="card">
                     <img src={item.img}></img>
                     <img src={item.type}></img>
                     <div className="name">{item.name}____<span>{handleValue(item.value)}</span> </div>
