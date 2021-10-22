@@ -8,13 +8,31 @@ header {
         width: 50px;
         position: absolute;
         left: 15px;
-
+        cursor: pointer;
+        
+        transition: background 0.3s, border-radius 0.3s;
         div {
-            height: 2px;
-            margin: 8px;
+            height: 2.8px;
+            margin: auto;
+            margin-top: 8px;
             background-color: white;
-            width: 25px;
+            width: 30px;
+
+          
+         
         }
+
+        &:hover{
+            div{
+                
+                background-color: var(--mostarda);
+            }
+          
+            
+           
+        }
+
+       
     }
 
     > div {

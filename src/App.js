@@ -4,8 +4,8 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { Home } from './Pages/Home';
 import { Pedidos } from './Pages/Pedidos';
 import { Carrinho } from './Pages/Carrinho';
-
-
+import { Sobre } from './Pages/Sobre';
+import { Contatos } from './Pages/Contatos';
 import { createStore, combineReducers } from "redux"
 import { Provider } from "react-redux"
 import "./styles/Global.scss"
@@ -13,6 +13,9 @@ import menuLateral from './reducers/menuLateralReducer';
 import { MenuLateral } from './components/menu-lateral';
 
 function App() {
+
+  
+
 
   const allReducers = combineReducers({
     menuLateral: menuLateral
@@ -37,6 +40,13 @@ function App() {
             </Route>
             <Route path="/carrinho">
               <Carrinho />
+            </Route>
+
+            <Route path = "/sobre">
+              <Sobre></Sobre>
+            </Route>
+            <Route path = "/contatos">
+              <Contatos></Contatos>
             </Route>
 
             <Route path="*">

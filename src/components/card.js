@@ -1,25 +1,30 @@
 import "../styles/Card.scss"
 import teste from "../assets/images/teste1.png"
 import hamburguer from "../assets/images/Hamburguer.svg"
-export function Card() {
+import { cardapio } from "../services/cardapio"
+
+export function Card(props) {
+
+    const { type, name, desc, value, img } = cardapio.hamburgueres[0]
+
+    let currencyValue = value.toLocaleString("pt-br", {style:"currency", currency:"brl"})
+
+
     return (
         <div>
             <div className='card'>
-                <img src={teste}></img>
-                <img src={hamburguer}></img>
-                <div className = "name">hamburguer____<span>R$ 20,00</span> </div>
-               
-                    <ul>
-                        <li>Carne 220g</li>
-                        <li>Alface</li>
-                        <li>Cebola</li>
-                        <li>Ovo, Queijo</li>
-                    </ul>
-              
+                <img src={img}></img>
+                <img src={type}></img>
+                <div className="name">{name}____<span>{currencyValue}</span> </div>
 
+                <ul>
+                    { desc.map((item=>{
+                        console.log(item)
+                        return (<li>{item}</li>)
+                    }))}
+                </ul>
 
-
-                <button>PEDIR AGORA!</button>
+                <button onClick={() => props.setPayment(true)}>PEDIR AGORA!</button>
             </div>
         </div>
 

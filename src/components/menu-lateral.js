@@ -19,22 +19,34 @@ import { menuActived, menuDisable } from "../actions/actionList"
 
 export function MenuLateral() {
 
+    function handleFocusMenu(event) {
+
+        const target = event.target.getAttribute("class")
+        if(target === "content-menuLateral menuExposed"){
+            dispatch(menuDisable())
+        }else{
+            dispatch(menuActived())
+        }
+        
+        if(target === "menu-hamburguer" || target === "line"){
+            dispatch(menuDisable())
+        }
+        
+    }
+
     const dispatch = useDispatch()
 
     const menuLateral = useSelector(state => { return state.menuLateral })
 
-    function MenuDisable() {
-        dispatch(menuDisable())
-        console.log(menuLateral)
-    }
+  
     return (
-        <>
+        <div onClick = {handleFocusMenu} className ={`content-menuLateral ${menuLateral? "menuExposed" : "menuhidden content-hidden"}`}>
 
             <div className={`menu-lateral ${menuLateral ? "menuExposed" : "menuhidden"}`}>
-                <div onClick={MenuDisable} className="menu-hamburguer">
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                <div className="menu-hamburguer">
+                    <div className = "line"></div>
+                    <div className = "line"></div>
+                    <div className = "line"></div>
                 </div>
                 <img src={LogoBorder} />
                 <nav className="menu-links">
@@ -69,6 +81,6 @@ export function MenuLateral() {
 
             </div>
 
-        </>
+        </div>
     )
 }

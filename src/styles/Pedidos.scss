@@ -1,0 +1,88 @@
+h1 {
+    text-align: start;
+    font-size: 6vw;
+    font-weight: 300;
+    padding: 30px 0 30px 60px;
+}
+
+.list-request {
+    width: 100%;
+    padding: 50px;
+
+    .CardRequest {
+        display: grid;
+        grid-template-areas: "card status";
+
+        grid-template-columns: 0.1fr 1fr;
+        grid-gap: 50px;
+        div {
+            grid-area: card;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            width: 20vw;
+            min-width: 150px;
+            background-color: var(--mostarda);
+            border-radius: 4vw;
+
+            img:nth-child(1n) {
+                max-height: 250px;
+                border-radius: 3vw;
+                width: 100%;
+                margin-bottom: 60px;
+            }
+            img:nth-child(2n) {
+                position: absolute;
+                bottom: 10px;
+                height: 5vw;
+                min-height: 50px;
+            }
+
+            p {
+                color: white;
+                font-size: 35px;
+            }
+            p:nth-child(2n) {
+                color: var(--vinho);
+            }
+        }
+        span {
+            text-align: start;
+            margin-top: 50px;
+            grid-area: status;
+            font-size: 5vw;
+
+            p {
+                color: var(--vinho);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    >h1 {
+        font-size: 50px;
+    }
+
+    .list-request{
+
+
+        .CardRequest{
+            div{
+                border-radius: 25px;
+                img:nth-child(1n){
+                    border-radius: 25px;
+                    margin-bottom: 30px;
+                }
+                p{
+                    font-size: 18px;
+        
+                }
+            }
+           
+        }
+       
+    }
+   
+}

@@ -1,5 +1,5 @@
 import { Header } from "../components/Header";
-import { MenuLateral } from "../components/menu-lateral";
+import { PaymentView } from "../components/Payment";
 import "../styles/Home.scss"
 import { Card } from "../components/card";
 
@@ -10,18 +10,22 @@ import Combo from "../assets/images/Combo.svg"
 import Garrafa from "../assets/images/Garrafa.svg"
 import Bolo from "../assets/images/Bolo.svg"
 import fundoOfertas from "../assets/images/fundoOfertas.svg"
+import { cardapio } from "../services/cardapio";
+
 
 import teste2 from "../assets/images/teste2.jpg"
 import { Footer } from "../components/Footer";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
 
+import { useState } from "react";
 export function Home() {
 
-    const menuLateral = useSelector(state => { return state.menuLateral })
-
+    
+    const dispatch = useDispatch()
+    const [payment, setPayment] = useState(false)
 
     return (
-        <>
+        <div>
             <Header></Header>
          
             <main>
@@ -45,11 +49,12 @@ export function Home() {
 
 
                 <div className="cardapio">
-                    <Card></Card>
-                    <Card></Card>
-                    <Card></Card>
-                    <Card></Card>
+                    <Card setPayment = {setPayment}></Card>
+                    <Card setPayment = {setPayment}></Card>
+                    <Card setPayment = {setPayment}></Card>
+                    <Card setPayment = {setPayment}></Card>
                 </div>
+                
                 <div className="bem-vindo">
                     <h1>OFERTAS DO DIA!</h1>
                 </div>
@@ -70,13 +75,13 @@ export function Home() {
 
 
 
-                        <button>PEDIR AGORA!</button>
+                        <button onClick = {()=>setPayment(true)}>PEDIR AGORA!</button>
                     </div>
                 </div>
 
             </main>
-
+            { payment? <PaymentView setPayment = {setPayment}></PaymentView>: "" }
             <Footer></Footer>
-        </>
+        </div>
     )
 }
