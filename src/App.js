@@ -1,6 +1,7 @@
 
 import './App.css';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import "./styles/Global.scss"
+import { Route, BrowserRouter, Switch,useHistory } from 'react-router-dom';
 import { Home } from './Pages/Home';
 import { Pedidos } from './Pages/Pedidos';
 import { Carrinho } from './Pages/Carrinho';
@@ -8,32 +9,34 @@ import { Sobre } from './Pages/Sobre';
 import { Contatos } from './Pages/Contatos';
 import { createStore, combineReducers } from "redux"
 import { Provider } from "react-redux"
-import "./styles/Global.scss"
+
+
 import menuLateral from './reducers/menuLateralReducer';
 import { MenuLateral } from './components/menu-lateral';
-import ParseMenu  from './reducers/menuBar';
+import ParseMenu from './reducers/menuBar';
+import payment from './reducers/ReducerPay';
 
 function App() {
+  const history = useHistory();
+ 
 
 
   const allReducers = combineReducers({
     menuLateral: menuLateral,
-    parsedMenuBar: ParseMenu
+    parsedMenuBar: ParseMenu,
+    payment: payment
   })
+
+  
   const store = createStore(allReducers)
   return (
 
     <div className="App">
-      <BrowserRouter>
 
-        <Provider store={store}>
+
+      <Provider store={store}>
+        <BrowserRouter>
           <Switch>
-
-
-
-            <Route exact path="/Home">
-              <Home />
-            </Route>
 
             <Route path="/pedidos">
               <Pedidos />
@@ -42,21 +45,31 @@ function App() {
               <Carrinho />
             </Route>
 
-            <Route path = "/sobre">
+            <Route path="/sobre">
               <Sobre></Sobre>
             </Route>
-            <Route path = "/contatos">
+
+            <Route path="/contatos">
               <Contatos></Contatos>
+            </Route>
+
+            <Route exact path="/">
+              <Home />
             </Route>
 
             <Route path="*">
               <Home />
             </Route>
+
+
           </Switch>
           <MenuLateral></MenuLateral>
-        </Provider>
-        
-      </BrowserRouter>
+
+        </BrowserRouter>
+     
+      </Provider>
+
+
 
     </div>
   )

@@ -1,5 +1,4 @@
-.content-card{
-    
+.content-card {
     display: flex;
     gap: 45px;
     flex-wrap: wrap;
@@ -9,7 +8,6 @@
 }
 
 .card {
- 
     width: 16vw;
     min-height: 511px;
     min-width: 250px;
@@ -25,9 +23,9 @@
         color: white;
         font-size: 35px;
         margin-bottom: 15px;
-      span{
-          color: var(--vinho);
-      }
+        span {
+            color: var(--vinho);
+        }
     }
 
     img:first-child {
@@ -59,34 +57,44 @@
         left: 0;
         right: 0;
         width: 60%;
-       
+
         font-size: 35px;
         margin-top: 25px;
         height: 65px;
 
-
         background-color: var(--vinho);
         color: white;
-
 
         border: none;
         border-radius: 50px;
         transition: transform 0.3s, background 0.2s;
         cursor: pointer;
-        &:hover{
+        &:hover {
             transform: scale(1.3);
         }
-        &:active{
-            background-color:#99C698;
+        &:active {
+            background-color: #99c698;
         }
     }
 }
 
-@media  screen and (max-width: 700px) {
-    .card{
-       
+@media screen and (max-width: 700px) {
+    .cardapio {
         height: 500px;
-        ul{
+    }
+    .content-card {
+        margin-top: -150px;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+    .card {
+        scroll-snap-align: center;
+        transform: scale(0.7);
+        height: 500px;
+        ul {
             font-size: 30px;
         }
     }

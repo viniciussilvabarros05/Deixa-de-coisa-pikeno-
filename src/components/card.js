@@ -1,19 +1,14 @@
 import "../styles/Card.scss"
-import teste from "../assets/images/teste1.png"
-import hamburguer from "../assets/images/Hamburguer.svg"
 import { cardapio } from "../services/cardapio"
-import { useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { invocPayment } from "../actions/actionList"
 
 export function Card(props) {
 
-    
-
-
-    let type_produtos = useSelector(state => {return (state.parsedMenuBar) })
+    let type_produtos = useSelector(state => {return state.parsedMenuBar })
     const cardapioProdutos = Object.getOwnPropertyDescriptor(cardapio, type_produtos)
-
-    
+    const payment = useSelector(state=> {return state.payment})
+    const dispatch = useDispatch()
 
     
     function handleValue(value) {
@@ -21,10 +16,24 @@ export function Card(props) {
 
     }
 
-    console.log(type_produtos)
+    async function PaymentCard(i){
+        await dispatch(invocPayment(i))
+        props.setPayment(true)
+    }
+
+    
 
     return (
         <div className ={`content-card ${props.animation? "animation-cardapio" : ''}`}>{cardapioProdutos.value.map((item, index) => {
+            const ItemRequest = {
+                type:item.type,
+                value:item.value,
+                name:item.name,
+                img:item.img,
+                desc:item.desc
+            }
+
+
             return (
                 <div key={index} className="card">
                     <img src={item.img}></img>
@@ -38,7 +47,7 @@ export function Card(props) {
                         })}
                     </ul>
 
-                    <button onClick={() => props.setPayment(true)}>PEDIR AGORA!</button>
+                    <button onClick={()=>PaymentCard(ItemRequest)}>PEDIR AGORA!</button>
                 </div>
             )
         }

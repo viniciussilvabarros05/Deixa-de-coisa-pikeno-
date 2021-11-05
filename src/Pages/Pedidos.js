@@ -6,7 +6,7 @@ import "../styles/Pedidos.scss"
 export function Pedidos(){
 
     return (
-        <>
+        <div className="content-pedidos">
         <Header></Header>
         <h1>SEUS PEDIDOS:</h1>
         <CardRequest></CardRequest>
@@ -15,7 +15,7 @@ export function Pedidos(){
         <CardRequest></CardRequest>
         <Footer></Footer>
       
-        </>
+        </div>
     )
 
 

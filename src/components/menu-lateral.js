@@ -50,7 +50,7 @@ export function MenuLateral() {
                 </div>
                 <img src={LogoBorder} />
                 <nav className="menu-links">
-                    <NavLink activeClassName="ActivedMenu" to="/Home"><img src={Home} />HOME</NavLink>
+                    <NavLink  to="/"><img src={Home} />HOME</NavLink>
 
 
                     <NavLink activeClassName="ActivedMenu"

@@ -10,14 +10,14 @@ import Combo from "../assets/images/Combo.svg"
 import Garrafa from "../assets/images/Garrafa.svg"
 import Bolo from "../assets/images/Bolo.svg"
 import fundoOfertas from "../assets/images/fundoOfertas.svg"
-import { cardapio } from "../services/cardapio";
+
 
 
 import teste2 from "../assets/images/teste2.jpg"
 import { Footer } from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { parsedMenuBar } from "../actions/actionList";
 export function Home() {
 
@@ -31,14 +31,14 @@ export function Home() {
 
     let type_produtos = useSelector(state => { return (state.parsedMenuBar) })
 
-   async function parseItemsMenu(i) {
+    function parseItemsMenu(i) {
         if(type_produtos === i){
             return
         }
         setAnimation(true)
 
-       await setTimeout(()=>dispatch(parsedMenuBar(i)), 950)
-        setTimeout(() => { setAnimation(false) }, 1700)
+        setTimeout(()=>dispatch(parsedMenuBar(i)), 500)
+        setTimeout(() => { setAnimation(false) }, 700)
 
 
 

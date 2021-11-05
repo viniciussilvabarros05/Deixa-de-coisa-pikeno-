@@ -27,6 +27,11 @@ footer {
     font-size: 25px;
     background-color: var(--vinho);
 
+    img {
+      
+      
+    }
+
     .contatos {
         display: flex;
         align-items: center;
@@ -42,6 +47,11 @@ footer {
             text-align: justify;
             gap: 15px;
             width: 250px;
+            transition: background 0.3s , transform 0.3s;
+            &:hover{
+                filter:  sepia(1) saturate(9) brightness(1) contrast(1);
+                transform: scale(1.2);
+               } 
         }
     }
 

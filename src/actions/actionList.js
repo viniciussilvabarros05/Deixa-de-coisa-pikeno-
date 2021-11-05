@@ -15,7 +15,12 @@ export function menuDisable() {
 
 }
 
-export function parsedMenuBar(i){
-    let types= i
-    return ({type: 'PARSE', payload : types})
+export function parsedMenuBar(i) {
+    let types = i
+    return ({ type: 'PARSE', payload: types })
+}
+
+export function invocPayment(i) {
+    let request = i
+    return ({ type: "PAYMENT", payload: request })
 }
