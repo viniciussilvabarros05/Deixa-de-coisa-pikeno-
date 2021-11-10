@@ -4,10 +4,10 @@
 }
 
 :root {
-    --mostarda: #E69232;
-    --preto-cinza: #231F20;
-    --vinho: #A31E23;
-    --creme: #D0C4AD;
+    --mostarda: #e69232;
+    --preto-cinza: #231f20;
+    --vinho: #a31e23;
+    --creme: #d0c4ad;
 }
 
 * {
@@ -15,8 +15,7 @@
 }
 
 html {
-    background-image: url("../assets/images/background.png");
-    background-position: center;
+    background: url("../assets/images/background.png") no-repeat center top;
     background-size: cover;
 }
 
@@ -28,8 +27,6 @@ footer {
     background-color: var(--vinho);
 
     img {
-      
-      
     }
 
     .contatos {
@@ -47,11 +44,11 @@ footer {
             text-align: justify;
             gap: 15px;
             width: 250px;
-            transition: background 0.3s , transform 0.3s;
-            &:hover{
-                filter:  sepia(1) saturate(9) brightness(1) contrast(1);
+            transition: background 0.3s, transform 0.3s;
+            &:hover {
+                filter: sepia(1) saturate(9) brightness(1) contrast(1);
                 transform: scale(1.2);
-               } 
+            }
         }
     }
 
@@ -64,5 +61,5 @@ footer {
 
 .ActivedMenu {
     background-color: var(--mostarda);
-    box-shadow: 0 0 6px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.3);
 }

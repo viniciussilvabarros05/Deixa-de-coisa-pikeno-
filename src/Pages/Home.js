@@ -16,35 +16,52 @@ import fundoOfertas from "../assets/images/fundoOfertas.svg"
 import teste2 from "../assets/images/teste2.jpg"
 import { Footer } from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-
-import { useState } from "react";
+import { db } from "../services/firebase"
+import { useEffect, useState } from "react";
 import { parsedMenuBar } from "../actions/actionList";
+
 export function Home() {
 
 
+    const [payment, setPayment] = useState(false)
+    const [animation, setAnimation] = useState(false)
+    const type_produtos = useSelector(state => { return (state.parsedMenuBar) })
+
+    const Cardapio = useSelector(state => state.cardapio)
     const dispatch = useDispatch()
 
-    const [payment, setPayment] = useState(false)
-
-    const [animation, setAnimation] = useState(false)
 
 
-    let type_produtos = useSelector(state => { return (state.parsedMenuBar) })
+
+
+
+
+
+    useEffect(() => {
+        const unsubscribe = db.collection("Cardápio").doc("Cardapio").onSnapshot((doc) => {
+            dispatch({ type: "DATABASE", payload: doc.data() })
+        })
+
+
+        return () => {
+            unsubscribe()
+        }
+
+    }, [])
+
+
 
     function parseItemsMenu(i) {
-        if(type_produtos === i){
+
+        if (type_produtos === i) {
             return
         }
         setAnimation(true)
 
-        setTimeout(()=>dispatch(parsedMenuBar(i)), 500)
+        setTimeout(() => dispatch(parsedMenuBar(i)), 500)
         setTimeout(() => { setAnimation(false) }, 700)
 
-
-
     }
-
-
 
 
     return (
@@ -73,7 +90,6 @@ export function Home() {
 
                 <div className="cardapio">
                     <Card animation={animation} setAnimation={setAnimation} setPayment={setPayment}></Card>
-
                 </div>
 
                 <div className="bem-vindo">

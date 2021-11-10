@@ -1,22 +1,35 @@
 .content-card {
     display: flex;
     gap: 45px;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     position: relative;
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+.content-card::-webkit-scrollbar {
+    background-color: var(--vinho);
+    
+    
+}
+
+.content-card::-webkit-scrollbar-thumb {
+    background: rgb(194, 185, 185);
+    border-radius: 15px;
+   
 }
 
 .card {
     width: 16vw;
     min-height: 511px;
-    min-width: 250px;
+    min-width: 307px;
     padding-bottom: 12px;
     border-radius: 45px;
     font-size: 30px;
     position: relative;
     box-sizing: border-box;
-
+    scroll-snap-align: center;
     background-color: var(--mostarda);
 
     .name {
@@ -86,6 +99,7 @@
         margin-top: -150px;
         justify-content: flex-start;
         flex-wrap: nowrap;
+        gap: 0;
 
         overflow-x: auto;
         scroll-snap-type: x mandatory;

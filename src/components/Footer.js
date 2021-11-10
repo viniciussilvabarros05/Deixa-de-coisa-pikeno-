@@ -9,15 +9,16 @@ export function Footer() {
             <img src={LogoYellow} />
 
             <div className="contatos">
+
                 <div className="instagram">
                     <img src={Instagram} />
-                    <spa>@deixadecoisa_pikeno</spa>
+                    <span>@deixadecoisa_pikeno</span>
                 </div>
 
                 <div className="localização">
                     <img src={Whatsapp} />
-                    <spa>+55 98 00000000
-                        +55 98 00000001</spa>
+                    <span>+55 98 00000000
+                        +55 98 00000001</span>
                 </div>
 
                 <div className="whatsapp">
@@ -25,7 +26,6 @@ export function Footer() {
                     <span>Rua 0, Casa 0, Avenizada zerada
                         cep 0000000</span>
                 </div>
-
 
             </div>
 

@@ -11,8 +11,6 @@ export function Pedidos(){
         <h1>SEUS PEDIDOS:</h1>
         <CardRequest></CardRequest>
         <CardRequest></CardRequest>
-        <CardRequest></CardRequest>
-        <CardRequest></CardRequest>
         <Footer></Footer>
       
         </div>

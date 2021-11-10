@@ -1,0 +1,108 @@
+.content-login {
+    height: 100vh;
+    header {
+        background-color: transparent;
+        img {
+            display: none;
+        }
+    }
+
+    footer {
+        background-color: transparent;
+        position: absolute;
+        bottom: 0;
+        img {
+            display: none;
+        }
+
+        .contatos {
+            div {
+                span {
+                    display: none;
+                }
+            }
+        }
+    }
+    form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 1;
+        position: absolute;
+
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+
+        margin: auto;
+        gap: 5px;
+
+        max-width: 300px;
+        min-width: 200px;
+        height: 500px;
+
+        border-radius: 15px;
+        background-color: var(--vinho);
+        box-shadow: 1px 1px 5px 5px rgba($color: #000000, $alpha: 0.2);
+
+        img {
+            position: absolute;
+            top: -50px;
+            height: 100px;
+            padding: 10px;
+            width: 100px;
+            border-radius: 50%;
+            background-color: var(--mostarda);
+        }
+
+        input {
+            background-color: #c4c4c4;
+            border: none;
+            border-radius: 10px;
+
+            width: 80%;
+            height: 40px;
+            padding: 10px;
+            font-size: 30px;
+        }
+
+        button {
+            width: 250px;
+            padding: 10px;
+            font-size: 25px;
+        }
+
+        .buttons {
+            position: absolute;
+            bottom: 30px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            p {
+                font-size: 20px;
+            }
+        }
+        #Login {
+            background-color: var(--creme);
+            border-radius: 50px;
+            margin-bottom: 50px;
+
+            border: none;
+        }
+        #createAccount {
+            font-size: 20px;
+            width: 100px;
+            color: var(--mostarda);
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s;
+            &:hover {
+                transform: scale(1.3);
+            }
+        }
+    }
+}
