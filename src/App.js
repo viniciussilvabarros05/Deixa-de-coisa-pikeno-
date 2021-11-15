@@ -18,11 +18,12 @@ import { MenuLateral } from './components/menu-lateral';
 import ParseMenu from './reducers/menuBar';
 import payment from './reducers/ReducerPay';
 import { Cozinha } from './Pages/Cozinha';
-import { Admin } from './Pages/Admin';
+import { Admin } from './Admin/Admin';
 import { Login } from './Pages/Login';
 import AdminReducer from './reducers/AdminReducer';
 import { PrivateRouter } from './components/PrivateRouter';
 import cardapio from './reducers/Cardapio';
+import { Cardapio } from './Admin/CardapioAdmin';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
 
 
   const store = createStore(allReducers)
+  
   return (
 
     <div className="App">
@@ -69,6 +71,20 @@ function App() {
 
             <PrivateRouter path="/adminpikeno">
               <Admin />
+            </PrivateRouter>
+
+            <PrivateRouter exact path="/cardapio">
+              <Cardapio />
+            </PrivateRouter>
+
+            <PrivateRouter path="/adminpikeno/ofertas">
+            
+            </PrivateRouter>
+            <PrivateRouter path="/adminpikeno/relatorio">
+     
+            </PrivateRouter>
+            <PrivateRouter path="/adminpikeno/clientes">
+            
             </PrivateRouter>
 
             <Route exact path="/cozinha">

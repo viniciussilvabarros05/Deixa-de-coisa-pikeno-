@@ -1,15 +1,13 @@
-import teste2 from "../assets/images/teste2.jpg"
-import Hamburguer from "../assets/images/Hamburguer.svg"
 
-export function CardRequest() {
+export function CardRequest(props) {
     return (
-        <div className ="list-request">
+        <div className="list-request">
             <div className="CardRequest">
                 <div>
-                    <img src={teste2} />
-                    <img src={Hamburguer} />
-                    <p className = "desc">Hamburguer</p>
-                    <p className = "value">R$ 20,00</p>
+                    <img src={props.item.img} />
+                    <img src={props.item.type} />
+                    <p className="desc">{props.item.name}</p>
+                    <p className="value">R$ {props.item.value}</p>
                 </div>
                 <span>Status: <p>Em preparo</p></span>
 

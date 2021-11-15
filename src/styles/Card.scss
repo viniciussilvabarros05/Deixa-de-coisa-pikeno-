@@ -55,10 +55,11 @@
     }
 
     ul {
-        font-size: 35px;
+        font-size: 25px;
         text-align: start;
-        width: 40%;
+        width: 60%;
         margin-left: 16%;
+        margin-bottom: 80px;
     }
     button {
         margin: auto;
@@ -93,7 +94,7 @@
 
 @media screen and (max-width: 700px) {
     .cardapio {
-        height: 500px;
+        
     }
     .content-card {
         margin-top: -150px;
@@ -107,9 +108,10 @@
     .card {
         scroll-snap-align: center;
         transform: scale(0.7);
-        height: 500px;
+        height: 90%;
         ul {
             font-size: 30px;
+            margin-bottom: 80px;
         }
     }
 }

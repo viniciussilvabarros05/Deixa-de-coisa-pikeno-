@@ -7,8 +7,8 @@ import { Card } from "../components/card";
 import Hamburguer from "../assets/images/Hamburguer.svg"
 import Batata from "../assets/images/Batata.svg"
 import Combo from "../assets/images/Combo.svg"
-import Garrafa from "../assets/images/Garrafa.svg"
-import Bolo from "../assets/images/Bolo.svg"
+import Garrafa from "../assets/images/Bebida.svg"
+import Bolo from "../assets/images/Doce.svg"
 import fundoOfertas from "../assets/images/fundoOfertas.svg"
 
 
@@ -25,29 +25,33 @@ export function Home() {
 
     const [payment, setPayment] = useState(false)
     const [animation, setAnimation] = useState(false)
-    const type_produtos = useSelector(state => { return (state.parsedMenuBar) })
-
     const Cardapio = useSelector(state => state.cardapio)
+    const type_produtos = useSelector(state => { return (state.parsedMenuBar) })
+    let arrayProdutos = []
     const dispatch = useDispatch()
 
 
 
-
-
-
-
-
     useEffect(() => {
-        const unsubscribe = db.collection("Cardápio").doc("Cardapio").onSnapshot((doc) => {
-            dispatch({ type: "DATABASE", payload: doc.data() })
+       
+    
+        const unsubscribe = db.collection(type_produtos).onSnapshot((doc) => {
+            const arrayItens = []
+            
+            doc.forEach(item => {
+                arrayItens.push(item.data())
+            })
+            arrayProdutos = arrayItens
+            dispatch({ type: "DATABASE", payload: arrayProdutos })
+
         })
-
-
+        console.log("oi")
+        
         return () => {
             unsubscribe()
         }
 
-    }, [])
+    }, [type_produtos])
 
 
 
@@ -58,7 +62,7 @@ export function Home() {
         }
         setAnimation(true)
 
-        setTimeout(() => dispatch(parsedMenuBar(i)), 500)
+        setTimeout(() => dispatch(parsedMenuBar(i)), 400)
         setTimeout(() => { setAnimation(false) }, 700)
 
     }

@@ -1,31 +1,43 @@
 import "../styles/Card.scss"
-import {cardapio} from "../services/cardapio"
+import { cardapio } from "../services/cardapio"
 import { useSelector, useDispatch } from "react-redux"
 import { invocPayment } from "../actions/actionList"
+import { useEffect, useState } from "react"
 
-export  function Card(props) {
+export function Card(props) {
 
     const type_produtos = useSelector(state => { return state.parsedMenuBar })
-    const Cardapio =  useSelector(state =>  state.cardapio)
-    const cardapioProdutos = Object.getOwnPropertyDescriptor(Cardapio, type_produtos)
+
+    const Cardapio = useSelector(state => state.cardapio)
+    // const filterCardapio = Cardapio.filter(item => Object.keys(item) == type_produtos)
+
+
     const dispatch = useDispatch()
-    
+
 
     function handleValue(value) {
         return value.toLocaleString("pt-br", { style: "currency", currency: "brl" })
+
     }
 
+
     async function PaymentCard(i) {
+
         await dispatch(invocPayment(i))
         props.setPayment(true)
+
     }
 
 
     return (
+
+
         <div className={`content-card ${props.animation ? "animation-cardapio" : ''}`}>
 
-            {cardapioProdutos.value.map((item, index) => {
-
+            {Cardapio.map((item, index) => {
+                if (item.falseItem) {
+                    return
+                }
                 const ItemRequest = {
                     type: item.type,
                     value: item.value,

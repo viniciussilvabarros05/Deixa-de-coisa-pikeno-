@@ -11,6 +11,7 @@ export function Login() {
     const dispatch = useDispatch()
     const history = useHistory()
 
+
     function loginAdm(event) {
         event.preventDefault()
 
@@ -37,7 +38,6 @@ export function Login() {
 
 
     useEffect(() => {
-
         if (admin) {
             history.push("/adminpikeno")
             localStorage.setItem("savedAdm", JSON.stringify(admin))

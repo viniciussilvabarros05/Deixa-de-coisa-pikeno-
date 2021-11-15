@@ -37,37 +37,40 @@ export function PaymentView(props) {
     }, [quant])
 
 
-return (
-    <div className="content-payment">
-        <div className="payment-card">
-            <div className="request">
-                <img src={payment.img}></img>
+    return (
+        <div className="content-payment">
+            <div className="payment-card">
+                <div className="request">
+                    <img src={payment.img}></img>
 
-                <p>Total: {handleValue(payment.valueTotal)}<input onChange={parseQuantidade} id="quantidade" type="number" placeholder="1" min="1"></input></p>
+                    <p>Total: {handleValue(payment.valueTotal)}
+                        <input onChange={parseQuantidade} id="quantidade" type="number" placeholder="1" min="1"></input>
+                    </p>
 
-                <p> {payment.desc.map((item) => {
-                    return item + ", "
-                })}</p>
+                    <p> {payment.desc.map((item) => {
+                        return item + ", "
+                    })}</p>
 
-            </div>
-            <form>
-                <img src={Logo}></img>
-                <input placeholder="nome completo"></input>
-                <div>
-                    <label>Forma de pagamento:</label>
-                    <select>
-                        <option>Cartão</option>
-                        <option>Pix</option>
-                        <option>Dinheiro</option>
-                    </select>
                 </div>
+                
+                <form>
+                    <img src={Logo}></img>
+                    <input placeholder="nome completo"></input>
+                    <div>
+                        <label>Forma de pagamento:</label>
+                        <select>
+                            <option>Cartão</option>
+                            <option>Pix</option>
+                            <option>Dinheiro</option>
+                        </select>
+                    </div>
 
 
-                <button onClick={() => props.setPayment(false)}>ADICIONAR AO CARRINHO</button>
-                <div onClick={() => props.setPayment(false)} className="button-cancel">CANCELAR</div>
+                    <button onClick={() => props.setPayment(false)}>ADICIONAR AO CARRINHO</button>
+                    <div onClick={() => props.setPayment(false)} className="button-cancel">CANCELAR</div>
 
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-)
+    )
 }
