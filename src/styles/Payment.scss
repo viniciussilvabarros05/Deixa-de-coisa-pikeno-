@@ -23,12 +23,15 @@
             background-color: var(--vinho);
             padding: 20px;
 
-            flex: 0.6;
+            flex: 0.4;
             width: 50%;
+            
+
 
             img:nth-child(1n) {
                 border-radius: 35px;
                 width: 100%;
+            
             }
 
             p {
@@ -53,7 +56,7 @@
                 border-radius: 15px;
                 width: 40%;
     
-                padding: 10px 0 10px 10px;
+                padding: 10px 5px 10px 10px;
                 margin-bottom: 15px;
                 background-color: var(--preto-cinza);
                 position: relative;

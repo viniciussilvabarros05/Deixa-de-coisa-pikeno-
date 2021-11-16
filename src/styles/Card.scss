@@ -23,7 +23,7 @@
 .card {
     width: 16vw;
     min-height: 511px;
-    min-width: 307px;
+    min-width: 350px;
     padding-bottom: 12px;
     border-radius: 45px;
     font-size: 30px;
@@ -31,11 +31,12 @@
     box-sizing: border-box;
     scroll-snap-align: center;
     background-color: var(--mostarda);
-
+    transform: scale(0.9);
     .name {
         color: white;
         font-size: 35px;
         margin-bottom: 15px;
+        margin: 15px;
         span {
             color: var(--vinho);
         }
@@ -55,10 +56,12 @@
     }
 
     ul {
+        margin: auto;
         font-size: 25px;
-        text-align: start;
-        width: 60%;
-        margin-left: 16%;
+      
+        text-align: justify;
+        width: 80%;
+       
         margin-bottom: 80px;
     }
     button {

@@ -13,35 +13,44 @@ import Bolo from "../assets/images/Doce.svg"
 
 import "./styles/CardapioAdmin.scss"
 import { ModelEdit } from "./ModelEdit";
+import { ModelADD } from "./ModelADD";
 export function Cardapio() {
 
     const Cardapio = useSelector(state => state.cardapio)
     const type_produtos = useSelector(state => { return (state.parsedMenuBar) })
     const dispatch = useDispatch()
     const [modelEdit, setModelEdit] = useState(false)
-    const [itemEdit, setItemEdit] = useState({})
-   
+    const [modelADD, setModelADD] = useState(false)
 
-    
-    useEffect(() => {
-        
-    
-        const unsubscribe = db.collection(type_produtos).onSnapshot((doc) => {
+    const [itemEdit, setItemEdit] = useState({})
+    const [idRef, setId] = useState("empty")
+
+
+
+    useEffect(async () => {
+
+
+        const unsubscribe = await db.collection(type_produtos).onSnapshot((doc) => {
             const arrayItens = []
             doc.forEach(item => {
                 arrayItens.push(item.data())
             })
-           
+
             dispatch({ type: "DATABASE", payload: arrayItens })
 
         })
-        
+
         return () => {
             unsubscribe()
         }
 
     }, [type_produtos])
 
+    useEffect(() => {
+
+        db.collection(type_produtos).doc(idRef).delete()
+
+    }, [idRef])
 
     function handleValue(value) {
         return value.toLocaleString("pt-br", { style: "currency", currency: "brl" })
@@ -60,6 +69,20 @@ export function Cardapio() {
     async function parseItemCardapio(item) {
         await setItemEdit(item)
         setModelEdit(true)
+    }
+
+    function deleteItem(produto) {
+
+        if (window.confirm("Tem certeza que deseja excluir este item?")) {
+            db.collection(type_produtos).where("name", "==", produto.name).get().then(snapshot => {
+                snapshot.forEach(doc => {
+                    let document = doc.id
+                    setId(document)
+
+                })
+            })
+        }
+
     }
 
     return (
@@ -82,12 +105,12 @@ export function Cardapio() {
             <div className="menu-bar"></div>
             <section className="list">
                 <div className="bar">
-                    <button>+</button>
+                    <button onClick={() => setModelADD(true)}>+</button>
                 </div>
                 {Cardapio.map((item, index) => {
-                        if(item.falseItem){
-                            return 
-                        }
+                    if (item.falseItem) {
+                        return
+                    }
                     return (
                         <>
                             <div key={index} className="card">
@@ -104,12 +127,8 @@ export function Cardapio() {
 
                                 <div className="content-options">
                                     <div onClick={() => parseItemCardapio(item)} className="edit">EDITAR</div >
-                                    <div className="delete">Excluir</div>
+                                    <div className="delete" onClick={() => deleteItem(item)}>Excluir</div>
                                 </div>
-                                <div className="addDescription" onClick={() => {
-                                    item.desc.push('')
-                                    parseItemCardapio(item)
-                                }}>+</div>
                             </div>
 
 
@@ -123,5 +142,6 @@ export function Cardapio() {
 
             </section>
             {modelEdit ? <ModelEdit item={itemEdit} setModelEdit={setModelEdit} /> : ""}
+            {modelADD ? <ModelADD setModelADD={setModelADD}></ModelADD> : ""}
         </div>)
 }

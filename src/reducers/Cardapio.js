@@ -1,5 +1,5 @@
-import { cardapio as Cardapio } from "../services/cardapio";
-export default function cardapio(state = Cardapio.hamburgueres, action) {
+
+export default function cardapio(state = [], action) {
     switch (action.type) {
         case "DATABASE":
 

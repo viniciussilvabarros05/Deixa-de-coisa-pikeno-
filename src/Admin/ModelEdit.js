@@ -9,7 +9,7 @@ import Combo from "../assets/images/Combo.svg"
 import bebida from "../assets/images/Bebida.svg"
 import Doce from "../assets/images/Doce.svg"
 import { useEffect, useState } from "react"
-
+import { storage } from "../services/firebase"
 
 export function ModelEdit(props) {
     const type_produtos = useSelector(state => { return state.parsedMenuBar })
@@ -29,7 +29,7 @@ export function ModelEdit(props) {
 
             })
         })
-        
+
     }, [])
 
     function pushItemUpdated(item) {
@@ -42,7 +42,7 @@ export function ModelEdit(props) {
 
                 item.type = Batata
 
-    
+
                 return db.collection(type_produtos).doc(idRef).update(item)
             case "Hamburguer":
 
@@ -69,14 +69,14 @@ export function ModelEdit(props) {
 
     }
 
-
-
     function updateItem() {
         let type = document.getElementById("type-product").value
         let name = document.getElementById("name").value
         let value = document.getElementById("value").value
+        let img = document.getElementById("file").files[0]
         let allDescription = document.querySelectorAll(".description")
         let allValues = []
+        let ref = storage.ref("/Images")
 
         allDescription.forEach(item => {
             if (item.value.length == 0) {
@@ -89,17 +89,33 @@ export function ModelEdit(props) {
             name = props.item.name
 
         }
+       
         if (!value) {
             value = props.item.value
         }
+
         if (allValues.length == 0) {
             allValues = props.item.desc
         }
 
-        pushItemUpdated({ type: type, name: name, value: parseInt(value), desc: allValues })
+        if (!img) {
+            props.setModelEdit(false)
+            return  pushItemUpdated({ img: props.item.img, type: type, name: name, value: parseInt(value), desc: allValues })
+        }
+
+        ref.child(img.name).put(img).then(snapshot => {
+           
+            ref.child(img.name).getDownloadURL().then(url => {
+               
+                pushItemUpdated({ img: url, type: type, name: name, value: parseInt(value), desc: allValues })
+            })
+
+
+        })
         props.setModelEdit(false)
     }
 
+   
     return (
         <div className="modal">
             <div key={props.index} className="card">
@@ -141,3 +157,5 @@ export function ModelEdit(props) {
         </div>
     )
 }
+
+

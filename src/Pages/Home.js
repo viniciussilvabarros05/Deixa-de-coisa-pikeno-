@@ -25,19 +25,18 @@ export function Home() {
 
     const [payment, setPayment] = useState(false)
     const [animation, setAnimation] = useState(false)
-    const Cardapio = useSelector(state => state.cardapio)
     const type_produtos = useSelector(state => { return (state.parsedMenuBar) })
     let arrayProdutos = []
     const dispatch = useDispatch()
 
 
 
-    useEffect(() => {
-       
-    
-        const unsubscribe = db.collection(type_produtos).onSnapshot((doc) => {
+    useEffect(async () => {
+
+
+        const unsubscribe = await db.collection(type_produtos).onSnapshot((doc) => {
             const arrayItens = []
-            
+
             doc.forEach(item => {
                 arrayItens.push(item.data())
             })
@@ -46,7 +45,7 @@ export function Home() {
 
         })
         console.log("oi")
-        
+
         return () => {
             unsubscribe()
         }
