@@ -52,12 +52,6 @@ export function MenuLateral() {
                 <nav className="menu-links">
                     <NavLink  to="/"><img src={Home} />HOME</NavLink>
 
-
-                    <NavLink activeClassName="ActivedMenu"
-                     
-                     to="/cardapio"><img src={Menu} />CARDAPIO</NavLink>
-
-
                     <NavLink activeClassName="ActivedMenu"
                   
                      to="/pedidos"><img src={Pedidos} />PEDIDOS</NavLink>

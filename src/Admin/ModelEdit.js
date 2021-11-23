@@ -29,7 +29,6 @@ export function ModelEdit(props) {
 
             })
         })
-
     }, [])
 
     function pushItemUpdated(item) {
@@ -41,7 +40,6 @@ export function ModelEdit(props) {
             case "Batata":
 
                 item.type = Batata
-
 
                 return db.collection(type_produtos).doc(idRef).update(item)
             case "Hamburguer":
@@ -78,6 +76,8 @@ export function ModelEdit(props) {
         let allValues = []
         let ref = storage.ref("/Images")
 
+     
+
         allDescription.forEach(item => {
             if (item.value.length == 0) {
                 return
@@ -89,7 +89,7 @@ export function ModelEdit(props) {
             name = props.item.name
 
         }
-       
+
         if (!value) {
             value = props.item.value
         }
@@ -100,13 +100,13 @@ export function ModelEdit(props) {
 
         if (!img) {
             props.setModelEdit(false)
-            return  pushItemUpdated({ img: props.item.img, type: type, name: name, value: parseInt(value), desc: allValues })
+            return pushItemUpdated({ img: props.item.img, type: type, name: name, value: parseInt(value), desc: allValues })
         }
 
         ref.child(img.name).put(img).then(snapshot => {
-           
+
             ref.child(img.name).getDownloadURL().then(url => {
-               
+
                 pushItemUpdated({ img: url, type: type, name: name, value: parseInt(value), desc: allValues })
             })
 
@@ -115,7 +115,7 @@ export function ModelEdit(props) {
         props.setModelEdit(false)
     }
 
-   
+
     return (
         <div className="modal">
             <div key={props.index} className="card">
@@ -127,11 +127,21 @@ export function ModelEdit(props) {
                 <div>
                     <label>Tipo de produto:</label>
                     <select id="type-product">
-                        <option>Hamburguer</option>
-                        <option>Combo</option>
-                        <option>Bebida</option>
-                        <option>Doce</option>
-                        <option>Batata</option>
+                        <option>
+                            Hamburguer
+                        </option>
+                        <option>
+                            Batata
+                        </option>
+                        <option>
+                            Bebida
+                        </option>
+                        <option>
+                            Combo
+                        </option>
+                        <option>
+                            Doce
+                        </option>
                     </select>
                 </div>
                 <input type="text" className="name" id="name" placeholder={props.item.name}></input >

@@ -2,8 +2,6 @@ import { Header } from "../components/Header";
 import { PaymentView } from "../components/Payment";
 import "../styles/Home.scss"
 import { Card } from "../components/card";
-
-
 import Hamburguer from "../assets/images/Hamburguer.svg"
 import Batata from "../assets/images/Batata.svg"
 import Combo from "../assets/images/Combo.svg"
@@ -11,28 +9,26 @@ import Garrafa from "../assets/images/Bebida.svg"
 import Bolo from "../assets/images/Doce.svg"
 import fundoOfertas from "../assets/images/fundoOfertas.svg"
 
-
-
-import teste2 from "../assets/images/teste2.jpg"
 import { Footer } from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../services/firebase"
 import { useEffect, useState } from "react";
-import { parsedMenuBar } from "../actions/actionList";
+
+import { invocPayment, parsedMenuBar } from "../actions/actionList";
 
 export function Home() {
 
 
     const [payment, setPayment] = useState(false)
     const [animation, setAnimation] = useState(false)
+    const [oferta, setOferta] = useState('')
     const type_produtos = useSelector(state => { return (state.parsedMenuBar) })
     let arrayProdutos = []
     const dispatch = useDispatch()
-
+    const [pedidos, setPedidos] = useState([])
 
 
     useEffect(async () => {
-
 
         const unsubscribe = await db.collection(type_produtos).onSnapshot((doc) => {
             const arrayItens = []
@@ -44,7 +40,6 @@ export function Home() {
             dispatch({ type: "DATABASE", payload: arrayProdutos })
 
         })
-        console.log("oi")
 
         return () => {
             unsubscribe()
@@ -52,9 +47,51 @@ export function Home() {
 
     }, [type_produtos])
 
+    useEffect(() => {
+        const unsubscribe = db.collection("ofertas").doc("oferta").onSnapshot(doc => {
+            setOferta(doc.data())
+        })
+
+        return () => {
+            unsubscribe()
+        }
+    }, [])
+
+    useEffect(() => {
+
+        pedidos.forEach(async item => {
+            if (item.RequestStatus == "ready") {
+
+                try {
+                    await Notifyer()
+                } catch (error) {
+                    console.log(error.message)
+                }
+            }
+        })
+
+    }, [pedidos])
 
 
-    function parseItemsMenu(i) {
+    useEffect(() => {
+        const unsubscribe = db.collection("Pedidos").onSnapshot((snapshot) => {
+
+            const requestDB = []
+            snapshot.forEach(item => {
+                requestDB.push(item.data())
+            })
+
+            setPedidos(requestDB)
+        })
+
+        return () => {
+            unsubscribe()
+        }
+    }, [])
+
+
+
+    async function parseItemsMenu(i) {
 
         if (type_produtos === i) {
             return
@@ -62,9 +99,52 @@ export function Home() {
         setAnimation(true)
 
         setTimeout(() => dispatch(parsedMenuBar(i)), 400)
-        setTimeout(() => { setAnimation(false) }, 700)
+        setTimeout(() => setAnimation(false), 800)
 
     }
+
+
+
+    async function Notifyer() {
+        const permission = await Notification.requestPermission()
+
+        if (permission !== "granted") {
+            throw new Error("Permissão negada")
+        }
+
+        const notification = new Notification("Seu pedido está pronto", {
+            body: "Toma teu lanche",
+            icon: "https://deixa-de-coisa-pikeno.web.app/static/media/BorderLogo.515dd1f7.png"
+        })
+
+        notification.onclick = () => {
+            window.open("http://localhost:3000/pedidos")
+        }
+    }
+
+   
+
+    async function PaymentCard(i) {
+        const { value, desc, name, img, type } = i
+        await dispatch(invocPayment({
+            value,
+            desc,
+            name,
+            img,
+            type,
+            valueTotal: value
+        }))
+        setPayment(true)
+
+
+    }
+
+    function handleValue(value = 0) {
+
+        return value.toLocaleString("pt-br", { style: "currency", currency: "brl" })
+
+    }
+
 
 
     return (
@@ -100,22 +180,20 @@ export function Home() {
                 </div>
 
                 <div className="ofertas">
-                    <div className="content-produto"><img src={teste2} /></div>
+
+                    <div className="content-produto"><img src={oferta.img} /></div>
                     <div className="descrição"><img src={fundoOfertas}></img></div>
                     <div className="descrição-ofertas">
-                        <div className="name">hamburguer____<span>R$ 20,00</span></div>
+                        <div className="name">{oferta.name}____<span>{handleValue(oferta.value)}</span></div>
 
                         <ul>
-                            <li>Carne 220g</li>
-                            <li>Alface</li>
-                            <li>Cebola</li>
-                            <li>Ovo</li>
-                            <li>Queijo</li>
+                            <li>{oferta.desc}</li>
+
                         </ul>
 
 
 
-                        <button onClick={() => setPayment(true)}>PEDIR AGORA!</button>
+                        <button onClick={() => PaymentCard(oferta)}>PEDIR AGORA!</button>
                     </div>
                 </div>
 

@@ -9,12 +9,15 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-
-    
     ],
-    "rewrites":[{
-        "source":"**",
+    "rewrites": [
+      {
+        "source": "**",
         "destination": "/index.html"
-      }]
+      }
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

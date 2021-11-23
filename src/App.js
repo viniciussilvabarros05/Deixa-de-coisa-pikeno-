@@ -24,6 +24,7 @@ import AdminReducer from './reducers/AdminReducer';
 import { PrivateRouter } from './components/PrivateRouter';
 import cardapio from './reducers/Cardapio';
 import { Cardapio } from './Admin/CardapioAdmin';
+import { PrivateCozinha } from './components/PrivateRouterCozinha';
 
 function App() {
 
@@ -40,7 +41,7 @@ function App() {
 
 
   const store = createStore(allReducers)
-  
+
   return (
 
     <div className="App">
@@ -77,19 +78,16 @@ function App() {
               <Cardapio />
             </PrivateRouter>
 
-            <PrivateRouter path="/adminpikeno/ofertas">
+            <PrivateCozinha path="/admincozinha">
+              <Cozinha />
+            </PrivateCozinha>
             
-            </PrivateRouter>
             <PrivateRouter path="/adminpikeno/relatorio">
-     
+
             </PrivateRouter>
             <PrivateRouter path="/adminpikeno/clientes">
-            
-            </PrivateRouter>
 
-            <Route exact path="/cozinha">
-              <Cozinha />
-            </Route>
+            </PrivateRouter>
 
             <Route exact path="/login">
               <Login />

@@ -89,11 +89,24 @@ export function ModelADD(props) {
                     <div>
                         <label>Tipo de produto:</label>
                         <select id="type-product">
-                            <option>hamburgueres</option>
-                            <option>combos</option>
-                            <option>bebidas</option>
-                            <option>doces</option>
-                            <option>batatas</option>
+                        <option>
+                            hamburgueres
+                        </option>
+                        <option>
+                            batatas
+                        </option>
+                        <option>
+                            bebidas
+                        </option>
+                        <option>
+                            combos
+                        </option>
+                        <option>
+                            doces
+                        </option>
+                        <option>
+                            hamburgueres
+                        </option>
                         </select>
                     </div>
                     <input type="text" className="name" id="name" placeholder="nome" ></input >

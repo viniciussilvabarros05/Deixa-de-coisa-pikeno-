@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import usuario from "../assets/images/usuario.png"
-
+import { db } from "../services/firebase"
+import bcrypt from "bcryptjs"
 export function Login() {
     const admin = useSelector(state => state.admin)
     const dispatch = useDispatch()
@@ -16,32 +17,63 @@ export function Login() {
         event.preventDefault()
 
         const email = document.getElementById("email").value
-        const password = document.getElementById("password").value
+        // const password = document.getElementById("password").value
 
-        const adm = {
-            email,
-            senha: password
-        }
-        dispatch({ type: "LOGIN", payload: adm })
+
+        // const user = {
+        //     email,
+        //     password: bcrypt.hashSync(password)
+        //     , admin: false
+        // }
+        const confirmEmail = db.collection("Usuarios").where("email", "==", email).get().then(doc => {
+
+            if(doc.empty){
+                alert("Usuário não autorizado")
+            }
+
+            doc.forEach(item => {
+
+                const confirmPassword = bcrypt.compareSync(document.getElementById("password").value, item.data().password)
+
+                if (confirmPassword) {
+                    if (item.data().admin) {
+                        dispatch({ type: "LOGIN", payload: item.data() })
+                    }
+                    if (item.data().cozinha) {
+                        dispatch({ type: "LOGIN", payload: item.data() })
+
+                    }
+                } else {
+                    return alert("Email ou senha incorreto")
+                }
+
+
+            })
+        })
+
     }
 
 
     useEffect(() => {
-
-        let savedAdm = JSON.parse(localStorage.getItem("savedAdm"))
-
+        let savedAdm = JSON.parse(localStorage.getItem("adminLog"))
         if (savedAdm) {
             dispatch({ type: "LOGIN", payload: savedAdm })
         }
 
     }, [])
 
-
     useEffect(() => {
-        if (admin) {
+
+        if (admin.admin) {
             history.push("/adminpikeno")
-            localStorage.setItem("savedAdm", JSON.stringify(admin))
+            localStorage.setItem("adminLog", JSON.stringify(admin))
         }
+
+        if (admin.cozinha) {
+            history.push("/admincozinha")
+            localStorage.setItem("adminLog", JSON.stringify(admin))
+        }
+
     }, [admin])
 
 

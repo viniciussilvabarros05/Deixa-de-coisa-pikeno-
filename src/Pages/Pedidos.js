@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export function Pedidos() {
 
     const [pedidos, setPedidos] = useState([])
-    
+
     useEffect(() => {
         const unsubscribe = db.collection("Pedidos").onSnapshot((snapshot) => {
 
@@ -26,19 +26,16 @@ export function Pedidos() {
     }, [])
 
     return (
-        <div className="content-pedidos">
-            
-            
+        <>
             <Header></Header>
-            <h1>SEUS PEDIDOS:</h1>
-            
-            {pedidos.map((item, index) => {
-                return (<CardRequest item={item} key={index}></CardRequest>)
-            })}
+            <div className="content-pedidos">
 
-            <Footer></Footer>
+                {pedidos.map((item, index) => {
+                    return (<CardRequest item={item} key={index}></CardRequest>)
+                })}
 
-        </div>
+            </div>
+        </>
     )
 
 

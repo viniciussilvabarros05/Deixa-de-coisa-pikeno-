@@ -5,11 +5,11 @@ export function PrivateRouter({ children, ...rest }) {
 
     const admin = useSelector(state => state.admin)
 
-
     return (<Route {...rest}
-        render={({ Location }) => 
+        render={({ Location }) =>
             admin.admin ? (children) : (<Redirect to={{ pathname: "/login", state: { from: Location } }}></Redirect>)
+
         }>
 
-    </Route>)
+    </Route >)
 }
