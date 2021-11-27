@@ -13,7 +13,7 @@ import { Footer } from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../services/firebase"
 import { useEffect, useState } from "react";
-
+import swal from "sweetalert2"
 import { invocPayment, parsedMenuBar } from "../actions/actionList";
 
 export function Home() {
@@ -23,10 +23,9 @@ export function Home() {
     const [animation, setAnimation] = useState(false)
     const [oferta, setOferta] = useState('')
     const type_produtos = useSelector(state => { return (state.parsedMenuBar) })
-    let arrayProdutos = []
     const dispatch = useDispatch()
-    const [pedidos, setPedidos] = useState([])
-
+    const pedidos = useSelector(state => state.pedidos)
+    let arrayProdutos = []
 
     useEffect(async () => {
 
@@ -59,14 +58,23 @@ export function Home() {
 
     useEffect(() => {
 
-        pedidos.forEach(async item => {
+        pedidos.forEach(item => {
             if (item.RequestStatus == "ready") {
 
-                try {
-                    await Notifyer()
-                } catch (error) {
-                    console.log(error.message)
-                }
+                return swal.fire({
+                    html: '<pre>' + "Seu Pedido " + `<p>${item.name}</p>` + " está pronto" + '</pre>',
+                    imageUrl: item.img,
+                    imageWidth: 200,
+                    background: "#A31E23",
+
+                    width: "110%",
+                    customClass: {
+                        popup: "notification"
+                    },
+                    confirmButtonText: "Tô indo"
+
+                })
+
             }
         })
 
@@ -74,14 +82,16 @@ export function Home() {
 
 
     useEffect(() => {
-        const unsubscribe = db.collection("Pedidos").onSnapshot((snapshot) => {
+
+        const name = JSON.parse(localStorage.getItem("nameClient"))
+        const unsubscribe = db.collection("Pedidos").where("nameClient", "==", name).onSnapshot((snapshot) => {
 
             const requestDB = []
             snapshot.forEach(item => {
                 requestDB.push(item.data())
             })
 
-            setPedidos(requestDB)
+            dispatch({ type: "REQUEST", payload: requestDB })
         })
 
         return () => {
@@ -103,26 +113,6 @@ export function Home() {
 
     }
 
-
-
-    async function Notifyer() {
-        const permission = await Notification.requestPermission()
-
-        if (permission !== "granted") {
-            throw new Error("Permissão negada")
-        }
-
-        const notification = new Notification("Seu pedido está pronto", {
-            body: "Toma teu lanche",
-            icon: "https://deixa-de-coisa-pikeno.web.app/static/media/BorderLogo.515dd1f7.png"
-        })
-
-        notification.onclick = () => {
-            window.open("http://localhost:3000/pedidos")
-        }
-    }
-
-   
 
     async function PaymentCard(i) {
         const { value, desc, name, img, type } = i

@@ -25,6 +25,7 @@ import { PrivateRouter } from './components/PrivateRouter';
 import cardapio from './reducers/Cardapio';
 import { Cardapio } from './Admin/CardapioAdmin';
 import { PrivateCozinha } from './components/PrivateRouterCozinha';
+import { RequestClients } from './reducers/RequestClientsReducer';
 
 function App() {
 
@@ -36,7 +37,8 @@ function App() {
     parsedMenuBar: ParseMenu,
     payment: payment,
     admin: AdminReducer,
-    cardapio: cardapio
+    cardapio: cardapio,
+    pedidos: RequestClients
   })
 
 

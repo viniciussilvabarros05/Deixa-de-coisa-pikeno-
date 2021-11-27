@@ -134,17 +134,23 @@
 }
 
 @media screen and (max-width: 700px) {
-    > h1 {
-        font-size: 50px;
-    }
+    
 
     .list-request {
         .CardRequest {
             div {
-                border-radius: 25px;
-                height: 320px;
+                border-radius: 40px;
+      
                 p {
                     font-size: 18px;
+                }
+
+                #image-product{
+                    border-radius: 40px;
+                }
+
+                > h1 {
+                    font-size: 40px;
                 }
             }
 

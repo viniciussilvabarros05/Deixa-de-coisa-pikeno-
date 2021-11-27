@@ -56,6 +56,19 @@
     visibility: hidden;
 }
 
+.notification pre {
+    font-size: 30px;
+    word-wrap: break-word;
+    font-weight:300;
+
+    color: var(--mostarda);
+
+    p{
+        color: white;
+        font-size: 45px;
+    }
+}
+
 .content-menuLateral {
     background-color: transparent;
     width: 100%;

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { db } from "../services/firebase"
-
+import swal from "sweetalert2"
 
 
 
@@ -14,6 +14,7 @@ export function PaymentView(props) {
 
     const payment = useSelector(state => { return state.payment })
     const [quant, setQuant] = useState(1)
+    const [nameStorage, setNameStorage] = useState('')
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -38,24 +39,35 @@ export function PaymentView(props) {
         return value.toLocaleString("pt-br", { style: "currency", currency: "brl" })
     }
 
+    function time() {
+        let time = new Date()
+        let hour = time.getHours()
+        let minutes = time.getMinutes()
+        let seconds = time.getSeconds()
+
+        return `${hour}:${minutes}:${seconds}`
+    }
+
     function pushRequest(event) {
         event.preventDefault()
 
-        const nameClient = document.getElementById("name-client").value
+
+        let nameClient = document.getElementById("name-client").value
         const typePayment = document.getElementById("type-payment").value
 
-        if(!nameClient){
-            return alert("Por favor, insira seu nome completo")
+
+        if (!nameClient) {
+            if (!nameStorage) {
+                return swal.fire({
+                    title: "Por favor, insira seu nome Completo",
+                    icon: "warning"
+
+                })
+            } else {
+                nameClient = nameStorage
+            }
         }
 
-        function time(){
-            let time = new Date()
-            let hour = time.getHours()
-            let minutes = time.getMinutes()
-            let seconds = time.getSeconds()
-
-            return `${hour}:${minutes}:${seconds}`
-        }
         const request = {
             name: payment.name,
             hour: time(),
@@ -66,31 +78,45 @@ export function PaymentView(props) {
             value: payment.valueTotal,
             quant: quant,
             RequestStatus: "received",
-           
+
         }
 
-        db.collection("Pedidos").add(request).then(()=>{
+        db.collection("Pedidos").add(request).then(() => {
             props.setPayment(false)
-            return alert("Pedido Enviado")
+            saveName(nameClient)
+            return swal.fire({
+                title: "Pedido Enviado",
+                icon: "success"
+
+            })
         })
 
     }
 
+    function saveName(name) {
+        localStorage.setItem("nameClient", JSON.stringify(name))
+
+    }
+
+    useEffect(() => {
+        const nameClientSaved = JSON.parse(localStorage.getItem("nameClient"))
+        setNameStorage(nameClientSaved)
+    }, [payment])
 
 
     return (
         <div className="content-payment">
-            
+
             <div className="payment-card">
-                
+
                 <div className="request">
                     <img src={payment.img}></img>
-                   
+
                     <p>Total: {handleValue(payment.valueTotal)}
                         <input onChange={parseQuantidade} id="quantidade" type="number" placeholder="1" min="1"></input>
-                      
+
                     </p>
-                   
+
 
                     <p> {payment.desc.map((item) => {
                         return item
@@ -100,7 +126,7 @@ export function PaymentView(props) {
 
                 <form>
                     <img src={Logo}></img>
-                    <input id="name-client" placeholder="nome completo"></input>
+                    {nameStorage ? <p id="name-client"  value = {nameStorage} placeholder="nome completo"></p> : <input id="name-client" placeholder="nome completo"></input>}
 
                     <div>
                         <label>Forma de pagamento:</label>

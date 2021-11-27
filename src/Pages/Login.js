@@ -17,14 +17,6 @@ export function Login() {
         event.preventDefault()
 
         const email = document.getElementById("email").value
-        // const password = document.getElementById("password").value
-
-
-        // const user = {
-        //     email,
-        //     password: bcrypt.hashSync(password)
-        //     , admin: false
-        // }
         const confirmEmail = db.collection("Usuarios").where("email", "==", email).get().then(doc => {
 
             if(doc.empty){
@@ -46,8 +38,6 @@ export function Login() {
                 } else {
                     return alert("Email ou senha incorreto")
                 }
-
-
             })
         })
 
