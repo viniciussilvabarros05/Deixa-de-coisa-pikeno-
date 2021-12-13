@@ -17,7 +17,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { menuActived, menuDisable } from "../actions/actionList"
 
 
-export function MenuLateral() {
+export function MenuLateral() { 
+    const pedidos = useSelector(state=>state.carrinho)
 
     function handleFocusMenu(event) {
 
@@ -66,9 +67,9 @@ export function MenuLateral() {
                      
                      to="/sobre"><img src={Sobre} />SOBRE</NavLink>
 
-                    <div> <NavLink activeClassName="ActivedMenu"
+                    <div > <NavLink activeClassName="ActivedMenu"
                      
-                     to="/carrinho"><img src={Carrinho} />CARRINHO</NavLink></div>
+                     to="/carrinho"><img src={Carrinho} />CARRINHO <span>{pedidos.length}</span></NavLink></div>
                 </nav>
 
 

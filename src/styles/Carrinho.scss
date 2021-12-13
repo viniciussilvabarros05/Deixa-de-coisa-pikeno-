@@ -1,0 +1,98 @@
+.content-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    height: 100vh;
+    width: 100%;
+    gap: 2px;
+
+    .cart-card {
+        width: 70%;
+        min-width: 300px;
+        .nameProduct {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px 0 0;
+            background-color: var(--vinho);
+            border-radius: 15px;
+            color: white;
+            span,
+            p {
+                padding: 15px;
+                width: 90px;
+            }
+            font-size: 25px;
+            > div {
+                display: flex;
+
+                gap: 5px;
+                flex-direction: column;
+                button {
+                    border: none;
+                    border-radius: 15px;
+                    padding: 10px;
+                    background-color: red;
+                    color: white;
+                    font-size: 19px;
+                    font-weight: 600;
+                    transition: transform 0.3s;
+
+                    &:first-child {
+                        background-color: var(--mostarda);
+                        color: white;
+                    }
+                    &:hover {
+                        transform: scale(1.3);
+                    }
+                }
+            }
+        }
+    }
+
+    .content-button-confirm {
+        margin-top: 5px;
+        position: relative;
+        border-radius: 0 5rem 5rem 0;
+        background-color: var(--mostarda);
+        span {
+            display: inline-block;
+            padding: 15px;
+            font-family: intro-head;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: -40px;
+            border-width: 20px 40px 20px;
+            line-height: 0;
+            border-style: solid;
+            border-color: var(--mostarda) transparent var(--mostarda) transparent;
+            height: 20%;
+            width: 0;
+        }
+    }
+
+    .confirm-cart {
+        height: 50px;
+        font-size: 30px;
+        padding: 5px;
+        border: none;
+        color: white;
+        background-color: var(--preto-cinza);
+        border-radius: 15px;
+        cursor: pointer;
+        transition: filter 0.3s;
+        position: relative;
+        span {
+            background: var(--mostarda);
+            height: 100%;
+        }
+
+        &:hover {
+            filter: brightness(1.5);
+        }
+    }
+}

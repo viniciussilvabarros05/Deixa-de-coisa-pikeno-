@@ -10,22 +10,22 @@ export function Footer() {
 
             <div className="contatos">
 
-                <div className="instagram">
+                <a  target = "blank" href="https://www.instagram.com/deixadecoisa_pikeno/" className="instagram">
                     <img src={Instagram} />
                     <span>@deixadecoisa_pikeno</span>
-                </div>
+                </a>
 
                 <div className="localização">
                     <img src={Whatsapp} />
                     <span>+55 98 00000000
                         +55 98 00000001</span>
-                </div>
+                </div >
 
-                <div className="whatsapp">
+                <a  className="whatsapp">
                     <img src={Localização} />
                     <span>Rua 0, Casa 0, Avenizada zerada
                         cep 0000000</span>
-                </div>
+                </a >
 
             </div>
 

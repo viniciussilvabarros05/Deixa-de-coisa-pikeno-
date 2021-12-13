@@ -80,7 +80,6 @@ export function Login() {
 
                 <div className="buttons">
                     <button onClick={loginAdm} id="Login">LOGIN</button>
-                    <p>É novo aqui ?  <button id="createAccount">  Crie sua conta</button></p>
                 </div>
 
             </form>

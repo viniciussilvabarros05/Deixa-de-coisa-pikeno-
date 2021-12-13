@@ -3,10 +3,9 @@ import "../styles/Header.scss"
 import Logo from "../assets/images/Logo.svg"
 
 import { menuActived } from "../actions/actionList"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 export function Header() {
 
-    const menuLateral = useSelector((state) => { return state.menuLateral })
     const dispatch = useDispatch()
 
     function activeMenu() {

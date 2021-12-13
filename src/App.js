@@ -17,7 +17,7 @@ import menuLateral from './reducers/menuLateralReducer';
 import { MenuLateral } from './components/menu-lateral';
 import ParseMenu from './reducers/menuBar';
 import payment from './reducers/ReducerPay';
-import { Cozinha } from './Pages/Cozinha';
+import { Cozinha } from './Admin/Cozinha';
 import { Admin } from './Admin/Admin';
 import { Login } from './Pages/Login';
 import AdminReducer from './reducers/AdminReducer';
@@ -26,7 +26,7 @@ import cardapio from './reducers/Cardapio';
 import { Cardapio } from './Admin/CardapioAdmin';
 import { PrivateCozinha } from './components/PrivateRouterCozinha';
 import { RequestClients } from './reducers/RequestClientsReducer';
-
+import { Carrinho as RequestCarrinho } from './reducers/CarrinhoReducer';
 function App() {
 
 
@@ -38,7 +38,8 @@ function App() {
     payment: payment,
     admin: AdminReducer,
     cardapio: cardapio,
-    pedidos: RequestClients
+    pedidos: RequestClients,
+    carrinho: RequestCarrinho
   })
 
 
@@ -84,10 +85,10 @@ function App() {
               <Cozinha />
             </PrivateCozinha>
             
-            <PrivateRouter path="/adminpikeno/relatorio">
-
+            <PrivateRouter path="/relatorio">
+              
             </PrivateRouter>
-            <PrivateRouter path="/adminpikeno/clientes">
+            <PrivateRouter path="/clientes">
 
             </PrivateRouter>
 

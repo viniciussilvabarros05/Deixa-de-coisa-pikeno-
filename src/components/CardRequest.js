@@ -3,6 +3,8 @@ import { useSelector } from "react-redux"
 import pronto from "../assets/images/direito.png"
 import panela from "../assets/images/panela-quente.png"
 import { db } from "../services/firebase"
+import pdfImg from "../assets/images/pdf.png"
+import makeNoteRequests from "../services/pdfMake"
 
 export function CardRequest(props) {
     const admin = useSelector(state => state.admin)
@@ -45,18 +47,40 @@ export function CardRequest(props) {
         }
 
     }
+    function handleValue(value = 0) {
+
+        return value.toLocaleString("pt-br", { style: "currency", currency: "brl" })
+
+    }
 
 
     return (
         <div className="list-request">
+
             <div className={`CardRequest ${props.item.RequestStatus == "received" ? "" : props.item.RequestStatus == "ready" ? "ready" : "cooking"}`}>
-                <div>
-                    <img id="image-product" src={props.item.img} />
-                    <h1 className="desc">{props.item.name}</h1>
-                    <p className="value">Cliente: {props.item.nameClient}</p>
+
+                <div id="description-item">
+                    {admin ? <h3>{props.order + 1}</h3> : ""}
+
+                    <h1 className="value"> {props.item.nameClient}</h1>
+
+                    <div className="subtitle">Pedido(s)</div>
+                    {props.item.name.map((item, index) => {
+                        return (
+
+                            <p key={index} className="desc">{item.quantidade ? `${item.quantidade} ,  ${item.name}` : item}</p>
+                        )
+                    })}
+
+
+                    <div className="subtitle">Tipo de Pagamento</div>
                     <p className="desc">{props.item.typePayment}</p>
-                    <p className="value">R$ {props.item.value}</p>
-                    <p Style="color:var(--preto-cinza);">Quantidade:{props.item.quant}</p>
+
+                    <div className="subtitle">Valor</div>
+                    <p className="value"> {handleValue(props.item.value)}</p>
+
+                    <div className="subtitle">Quantidade</div>
+                    <p Style="color:var(--preto-cinza);">{props.item.quant}</p>
 
                     <div className="content-buttons">
                         {admin ? <button onClick={cooking} className="preparando"><img src={panela}></img></button> : ""}
@@ -64,8 +88,12 @@ export function CardRequest(props) {
                         {admin ? <button onClick={Delete} className="pronto">X</button> : ""}
 
                     </div>
-                </div>
 
+                </div>
+                {admin ? <button className="makePDFButton" onClick={() => makeNoteRequests(props.item)}>
+                    <img src={pdfImg} alt="gerar nota "></img>
+                
+                </button> : ""}
 
             </div>
 

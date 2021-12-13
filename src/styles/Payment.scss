@@ -16,27 +16,26 @@
         align-items: center;
         width: 95%;
         justify-content: center;
-
+        
         .request {
-            border-radius: 15px;
+            border-radius: 2rem;
             position: relative;
             background-color: var(--vinho);
             padding: 20px;
 
             flex: 0.4;
-            width: 50%;
-            
-
+      
 
             img:nth-child(1n) {
-                border-radius: 35px;
+                border-radius: 2rem;
                 width: 100%;
-            
+                max-height: 350px;
+                object-fit: contain;
             }
 
             p {
                 color: white;
-                font-size: 2vw;
+                font-size: 1.3rem;
                 margin: 5px;
                 width: 60%;
                 height: 30%;
@@ -47,15 +46,14 @@
                 border-radius: 15px;
             }
 
-           
             p:nth-child(2n) {
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
-                
+
                 border-radius: 15px;
                 width: 40%;
-    
+
                 padding: 10px 5px 10px 10px;
                 margin-bottom: 15px;
                 background-color: var(--preto-cinza);
@@ -85,7 +83,7 @@
 
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 5px;
             justify-content: center;
             align-items: center;
 
@@ -93,6 +91,7 @@
                 width: 9vw;
                 position: absolute;
                 top: -32px;
+                filter: brightness(1.2);
             }
             input {
                 width: 80%;
@@ -104,6 +103,7 @@
                 border-radius: 10px;
             }
             div {
+                margin-top: 5rem;
                 label {
                     color: var(--vinho);
                     font-size: 2vw;
@@ -112,10 +112,12 @@
             }
             select {
                 height: 3vw;
-                font-size: 1vw;
+                font-size: 20px;
+                border: none;
+                border-radius: 3px;
 
                 width: 6vw;
-                font-size: 35px;
+                
                 option {
                     font-size: 25px;
                 }
@@ -128,7 +130,7 @@
                 font-size: 2vw;
                 height: 4vw;
                 width: 80%;
-                margin-top: 100px;
+                margin-top: 60px;
 
                 transition: transform 0.3s, background 0.2s;
                 cursor: pointer;
@@ -141,7 +143,9 @@
                     border: 8px solid #99c698;
                 }
             }
-
+            .add-cart {
+                background-color: var(--creme);
+            }
             .button-cancel {
                 display: flex;
                 align-items: center;
@@ -156,6 +160,7 @@
 
                 transition: transform 0.3s, background 0.2s;
                 cursor: pointer;
+                margin-bottom: 15px;
                 &:hover {
                     transform: scale(1.3);
                     box-shadow: 1px 1px 5px 2px rgba($color: #000000, $alpha: 0.3);
@@ -179,7 +184,7 @@
             display: flex;
             gap: 10px;
             height: 200vh;
-            width: 90vw;
+            width: 100vw;
             flex-direction: column;
 
             justify-content: flex-end;
@@ -187,16 +192,19 @@
             .request {
                 width: 100%;
 
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
+                
                 p {
                     width: 100%;
-                    font-size: 8vw;
+                    padding: 15px;
+                    font-size: 1rem;
                 }
 
                 input {
                     font-size: 45px;
                     height: 10vh;
+                }
+                img {
+                    margin-bottom: 10px;
                 }
             }
 
@@ -218,15 +226,15 @@
                     }
 
                     select {
-                        font-size: 4vw;
-                        width: 15vw;
+                        font-size: 5vw;
+                        width: 17vw;
                         height: 10vw;
                     }
                 }
 
                 button {
-                    height: 15vw;
-                    font-size: 8vw;
+                    height: 50px;
+                    font-size: 5vw;
                 }
 
                 .button-cancel {
@@ -243,6 +251,7 @@
         .payment-card {
             .request {
                 display: flex;
+
                 flex-direction: column;
 
                 p:nth-child(2n) {
@@ -251,8 +260,6 @@
                     justify-content: space-evenly;
                     align-items: center;
                     width: 90%;
-                    input {
-                    }
                 }
             }
 

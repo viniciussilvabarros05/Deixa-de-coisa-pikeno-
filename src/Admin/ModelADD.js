@@ -60,7 +60,7 @@ export function ModelADD(props) {
                         name,
                         type,
                         desc: [desc],
-                        value: parseInt(value),
+                        value: parseFloat(value),
                         quant: 1
                     })
                 })
@@ -81,7 +81,7 @@ export function ModelADD(props) {
         <div>
             <div className="modal">
                 <div className="card">
-                    <img />
+                    <img alt='' />
 
                     <input id="file" type="file"></input>
 

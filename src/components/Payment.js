@@ -13,6 +13,8 @@ import swal from "sweetalert2"
 export function PaymentView(props) {
 
     const payment = useSelector(state => { return state.payment })
+
+    const carrinho = useSelector(state => state.carrinho)
     const [quant, setQuant] = useState(1)
     const [nameStorage, setNameStorage] = useState('')
     const dispatch = useDispatch()
@@ -44,13 +46,60 @@ export function PaymentView(props) {
         let hour = time.getHours()
         let minutes = time.getMinutes()
         let seconds = time.getSeconds()
-
-        return `${hour}:${minutes}:${seconds}`
+        let mili = time.getMilliseconds()
+        let fulltimeMinutes = (hour * 60 * 60) + (minutes*60) + seconds
+        return { time: fulltimeMinutes, fulltime: `${hour}:${minutes}:${seconds}:${mili}` }
     }
+  
 
     function pushRequest(event) {
         event.preventDefault()
 
+
+        let nameClient = document.getElementById("name-client").value
+        const typePayment = document.getElementById("type-payment").value
+
+
+        if (!nameClient) {
+            if (!nameStorage) {
+                return swal.fire({
+                    title: "Por favor, insira seu nome Completo",
+                    icon: "warning"
+
+                })
+            } else {
+                nameClient = nameStorage
+            }
+        }
+
+        const request = {
+            name: [payment.name],
+            hour: time().fulltime,
+            time: time().time,
+            nameClient,
+            typePayment,
+            type: payment.type,
+            img: payment.img,
+            value: payment.valueTotal,
+            quant: quant,
+            RequestStatus: "received",
+
+        }
+
+        db.collection("Pedidos").add(request).then(() => {
+            props.setPayment(false)
+            saveName(nameClient)
+            return swal.fire({
+                title: "Pedido Enviado",
+                icon: "success"
+
+            })
+        })
+
+    }
+
+    function pushCart(event) {
+        event.preventDefault()
 
         let nameClient = document.getElementById("name-client").value
         const typePayment = document.getElementById("type-payment").value
@@ -81,16 +130,8 @@ export function PaymentView(props) {
 
         }
 
-        db.collection("Pedidos").add(request).then(() => {
-            props.setPayment(false)
-            saveName(nameClient)
-            return swal.fire({
-                title: "Pedido Enviado",
-                icon: "success"
-
-            })
-        })
-
+        dispatch({ type: "ADDCART", payload: request })
+        props.setPayment(false)
     }
 
     function saveName(name) {
@@ -126,7 +167,7 @@ export function PaymentView(props) {
 
                 <form>
                     <img src={Logo}></img>
-                    {nameStorage ? <p id="name-client"  value = {nameStorage} placeholder="nome completo"></p> : <input id="name-client" placeholder="nome completo"></input>}
+                    {nameStorage ? <p id="name-client" value={nameStorage} placeholder="nome completo"></p> : <input id="name-client" placeholder="nome completo"></input>}
 
                     <div>
                         <label>Forma de pagamento:</label>
@@ -138,6 +179,7 @@ export function PaymentView(props) {
                     </div>
 
                     <button onClick={pushRequest}>FAZER PEDIDO</button>
+                    <button className="add-cart" onClick={pushCart}>ADICIONAR AO CARRINHO</button>
                     <div onClick={() => props.setPayment(false)} className="button-cancel">CANCELAR</div>
 
                 </form>

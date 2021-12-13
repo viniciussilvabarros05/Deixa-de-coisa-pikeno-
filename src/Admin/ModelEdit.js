@@ -1,6 +1,6 @@
 import "./styles/ModalEdit.scss"
 import { db } from "../services/firebase"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
 
 import Hamburguer from "../assets/images/Hamburguer.svg"
@@ -19,7 +19,7 @@ export function ModelEdit(props) {
     function handleValue(value) {
         return value.toLocaleString("pt-br", { style: "currency", currency: "brl" })
     }
-    const dispatch = useDispatch()
+ 
 
     useEffect(() => {
         db.collection(type_produtos).where("name", "==", props.item.name).get().then(snapshot => {
@@ -100,14 +100,14 @@ export function ModelEdit(props) {
 
         if (!img) {
             props.setModelEdit(false)
-            return pushItemUpdated({ img: props.item.img, type: type, name: name, value: parseInt(value), desc: allValues })
+            return pushItemUpdated({ img: props.item.img, type: type, name: name, value: parseFloat(value), desc: allValues })
         }
 
         ref.child(img.name).put(img).then(snapshot => {
 
             ref.child(img.name).getDownloadURL().then(url => {
 
-                pushItemUpdated({ img: url, type: type, name: name, value: parseInt(value), desc: allValues })
+                pushItemUpdated({ img: url, type: type, name: name, value: parseFloat(value), desc: allValues })
             })
 
 

@@ -16,6 +16,8 @@ import Home from "../assets/images/Home.svg"
 import "./styles/CardapioAdmin.scss"
 import { ModelEdit } from "./ModelEdit";
 import { ModelADD } from "./ModelADD";
+
+
 export function Cardapio() {
 
     const Cardapio = useSelector(state => state.cardapio)
@@ -29,10 +31,10 @@ export function Cardapio() {
 
 
 
-    useEffect(async () => {
+    useEffect(() => {
 
 
-        const unsubscribe = await db.collection(type_produtos).onSnapshot((doc) => {
+        const unsubscribe = db.collection(type_produtos).onSnapshot((doc) => {
             const arrayItens = []
             doc.forEach(item => {
                 arrayItens.push(item.data())
@@ -97,7 +99,7 @@ export function Cardapio() {
         db.collection(type).where("name", "==", name).get().then(snapshot => {
             console.log(snapshot)
             snapshot.forEach(doc => {
-                const{desc,name,img,type,} = doc.data()
+                const { desc, name, img, type, } = doc.data()
                 db.collection("ofertas").doc("oferta").set({
                     desc,
                     name,
@@ -116,15 +118,15 @@ export function Cardapio() {
 
 
             <div className="bar-cardapio">
-                <img onClick={() => parseItemsMenu("hamburgueres")} src={Hamburguer} />
+                <img onClick={() => parseItemsMenu("hamburgueres")} src={Hamburguer} alt='hamburgueres' />
                 <div className="point"></div>
-                <img onClick={() => parseItemsMenu("combos")} src={Combo} />
+                <img onClick={() => parseItemsMenu("combos")} src={Combo} alt="combos" />
                 <div className="point"></div>
-                <img onClick={() => parseItemsMenu("doces")} src={Bolo} />
+                <img onClick={() => parseItemsMenu("doces")} src={Bolo} alt="bolos" />
                 <div className="point"></div>
-                <img onClick={() => parseItemsMenu("batatas")} src={Batata} />
+                <img onClick={() => parseItemsMenu("batatas")} src={Batata} alt="batatas" />
                 <div className="point"></div>
-                <img onClick={() => parseItemsMenu("bebidas")} src={Garrafa} />
+                <img onClick={() => parseItemsMenu("bebidas")} src={Garrafa} alt="bebidas" />
             </div>
 
 
@@ -143,7 +145,7 @@ export function Cardapio() {
                     return (
                         <>
                             <div key={index} className="card">
-                                <img src={item.img}></img>
+                                <img src={item.img} alt={item.name}></img>
                                 <img src={item.type}></img>
                                 <div className="name">{item.name}____<span>{handleValue(item.value)}</span> </div>
 
@@ -167,9 +169,9 @@ export function Cardapio() {
             </section>
 
             <div className="content-ofertas">
-               
+
                 <div className="ofertas">
-                <h1>OFERTAS</h1>
+                    <h1>OFERTAS</h1>
                     <select id="type-oferta">
                         <option>
                             hamburgueres

@@ -2,6 +2,10 @@
     font-family: holyfat;
     src: url("../fonts/Holyfat.ttf") format("truetype");
 }
+@font-face {
+    font-family: intro-head;
+    src: url("../fonts/introHead.otf") format("opentype");
+}
 
 :root {
     --mostarda: #e69232;
@@ -14,10 +18,21 @@
     font-family: holyfat, "sans-serif", Verdana, Geneva, Tahoma, sans-serif;
 }
 
-html {
+body {
     background: url("../assets/images/background.png") no-repeat center top;
     background-size: cover;
 }
+p {
+    font-family: intro-head, "sans-serif", Verdana;
+    font-size: 1rem;    
+}
+
+
+select,option, li{
+    font-family: intro-head, "sans-serif", Verdana;
+    font-size: 1.2rem;
+}
+
 
 footer {
     width: 100%;
@@ -26,8 +41,7 @@ footer {
     font-size: 25px;
     background-color: var(--vinho);
 
-    img {
-    }
+ 
 
     .contatos {
         display: flex;
@@ -38,7 +52,9 @@ footer {
         flex-wrap: wrap;
         gap: 20px;
 
-        div {
+        div, a{
+            text-decoration: none;
+            color: white;
             display: flex;
             align-items: center;
             text-align: justify;

@@ -12,30 +12,39 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 5px;
+        gap: 10px;
         flex-direction: column;
-        width: 30%;
+        width: 20%;
+        padding: 5px;
         min-width: 400px;
         transform: scale(0.8);
-       
 
+      
         input {
-            padding: 3px;
+            padding: 5px;
             border: none;
             font-size: 25px;
             width: 90%;
             color: black;
-
-           
+            border-radius: 5rem;
         }
         div {
             width: 80%;
+
+            label {
+                font-size: 1.5rem;
+            }
         }
+
         select {
             width: 50%;
-            height: 30px;
+            height: 35px;
+            border: 0;
+            font-size: 1.5rem;
+        }
 
-            font-size: 30px;
+        img {
+            object-fit: contain;
         }
     }
 
@@ -71,12 +80,10 @@
     }
 }
 
-@media (max-width: 700px){
-
-    .modal{
-        .card{
+@media (max-width: 700px) {
+    .modal {
+        .card {
             height: 700px;
         }
     }
-    
 }

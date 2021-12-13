@@ -1,10 +1,10 @@
 .content-card {
     display: flex;
-    gap: 45px;
+    gap: 25px;
     align-items: center;
     justify-content: center;
     position: relative;
-
+    margin-bottom: 50px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
 }
@@ -21,20 +21,19 @@
     width: 16vw;
     min-height: 511px;
     min-width: 350px;
-    padding-bottom: 12px;
     border-radius: 45px;
-    font-size: 30px;
+    font-size: 1rem;
     position: relative;
     box-sizing: border-box;
     scroll-snap-align: center;
 
     background-color: var(--mostarda);
-    transform: scale(0.9);
+    transform: scale(0.8);
     .name {
         color: white;
         font-size: 35px;
-        margin-bottom: 15px;
         margin: 15px;
+        margin-bottom: 30px;
         span {
             color: var(--vinho);
         }
@@ -59,9 +58,9 @@
         font-size: 25px;
 
         text-align: justify;
-        width: 80%;
+        width: 70%;
 
-        margin-bottom: 80px;
+        margin-bottom: 100px;
     }
     button {
         margin: auto;
@@ -98,7 +97,6 @@
     .cardapio {
     }
     .content-card {
-        margin-top: -150px;
         justify-content: flex-start;
         flex-wrap: nowrap;
         gap: 0;
@@ -111,7 +109,7 @@
         transform: scale(0.7);
         height: 90%;
         ul {
-            font-size: 30px;
+            font-size: 1rem;
             margin-bottom: 80px;
         }
     }

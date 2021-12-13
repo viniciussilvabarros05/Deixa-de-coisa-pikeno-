@@ -1,20 +1,26 @@
 import { Header } from "../components/Header";
 import { PaymentView } from "../components/Payment";
-import "../styles/Home.scss"
 import { Card } from "../components/card";
+import { Footer } from "../components/Footer";
+
 import Hamburguer from "../assets/images/Hamburguer.svg"
 import Batata from "../assets/images/Batata.svg"
 import Combo from "../assets/images/Combo.svg"
 import Garrafa from "../assets/images/Bebida.svg"
 import Bolo from "../assets/images/Doce.svg"
 import fundoOfertas from "../assets/images/fundoOfertas.svg"
+import backgroundHamburguer from "../assets/images/backgroundHamburguer.png"
+import backgroundBatatas from "../assets/images/backgroundBatatas.png"
+import backgroundCebolas from "../assets/images/backgroundCebolas.png"
 
-import { Footer } from "../components/Footer";
+
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../services/firebase"
 import { useEffect, useState } from "react";
 import swal from "sweetalert2"
 import { invocPayment, parsedMenuBar } from "../actions/actionList";
+
+import "../styles/Home.scss"
 
 export function Home() {
 
@@ -62,7 +68,7 @@ export function Home() {
             if (item.RequestStatus == "ready") {
 
                 return swal.fire({
-                    html: '<pre>' + "Seu Pedido " + `<p>${item.name}</p>` + " está pronto" + '</pre>',
+                    html: '<pre>' + "Seu Pedido " + `<p>${item.name.map(desc => desc.name)}</p>` + " está pronto" + '</pre>',
                     imageUrl: item.img,
                     imageWidth: 200,
                     background: "#A31E23",
@@ -162,6 +168,9 @@ export function Home() {
 
 
                 <div className="cardapio">
+                    <img id="backgroundHamburguer" src={backgroundHamburguer} alt="hamburguer"></img>
+                    <img id="backgroundBatatas" src={backgroundBatatas} alt="batatas"></img>
+                    <img id="backgroundCebolas" src={backgroundCebolas} alt="cebolas"></img>
                     <Card animation={animation} setAnimation={setAnimation} setPayment={setPayment}></Card>
                 </div>
 
@@ -180,8 +189,6 @@ export function Home() {
                             <li>{oferta.desc}</li>
 
                         </ul>
-
-
 
                         <button onClick={() => PaymentCard(oferta)}>PEDIR AGORA!</button>
                     </div>

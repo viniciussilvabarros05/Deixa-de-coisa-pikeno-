@@ -41,7 +41,11 @@ export function Card(props) {
                 const ItemRequest = {
                     type: item.type,
                     value: item.value,
-                    name: item.name,
+                    name: {
+                        name: item.name,
+                        quantidade: item.quant,
+                        value: item.value
+                    },
                     img: item.img,
                     desc: item.desc,
                     quant: item.quant,

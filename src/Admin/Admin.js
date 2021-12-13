@@ -1,9 +1,8 @@
 import { Header } from "../components/Header"
-import { Footer } from "../components/Footer"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import "../styles/Admin.scss"
-import { NavLink, useRouteMatch } from "react-router-dom"
-import { useEffect } from "react"
+import { NavLink } from "react-router-dom"
+
 import bcrypt from "bcryptjs"
 import { db } from "../services/firebase"
 
@@ -61,6 +60,7 @@ export function Admin() {
             </div>
 
             <button className="logout" onClick={logout}>LOGOUT</button>
+
 
             <div className="content-register">
                 <h2>CADASTRO DE USUARIOS</h2>

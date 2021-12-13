@@ -15,12 +15,12 @@
     }
 }
 
+
 .content-pedidos {
     display: flex;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    flex-wrap: wrap;
 }
 .cooking {
     > div {
@@ -34,48 +34,64 @@
 }
 
 .list-request {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 50px;
+    width: 100%;
 
     .CardRequest {
-        display: grid;
-        grid-template-areas: "card";
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 80%;
 
-        grid-template-columns: 1fr;
-        grid-gap: 50px;
+        h3 {
+            font-size: 50px;
+            background-color: var(--preto-cinza);
+            color: white;
+            width: 100px;
+            border-radius: 50px;
+        }
 
-        div {
-            grid-area: card;
+        .subtitle{
+            background-color: var(--preto-cinza);
+            width: 9rem;
+            font-size: 25px;
+            margin-left: 15px;
+            padding: 4px;
+            border-radius: 15px;
+            color:white;
+        }
+        #description-item {
             display: flex;
+            width: 70%;
             flex-direction: column;
-            position: relative;
-
-            width: 20vw;
-            max-height: 600px;
+            gap: 10px;
             min-width: 180px;
-
             background-color: var(--mostarda);
             border-radius: 4vw;
-            #image-product {
-                border-radius: 3vw;
-                
-                max-height: 250px;
-                
-                width: 100%;
-                margin-bottom: 40px;
-            }
+
             h1 {
-                font-size: 60px;
+                font-size: 50px;
                 font-weight: 300;
             }
-         
+
             p {
                 color: var(--vinho);
-                font-size: 35px;
+                font-size: 20px;
+                border-radius: 10px;
+                padding: 5px;
+                background-color: var(--creme);
+                width: 80%;
+                text-align: start;
+                margin: auto;
             }
 
             p:nth-child(2n) {
                 color: var(--preto-cinza);
             }
+
             .content-buttons {
                 margin: auto;
                 margin-bottom: 15px;
@@ -84,7 +100,6 @@
                 display: flex;
                 justify-content: center;
                 gap: 15px;
-             
 
                 flex-direction: row;
                 button {
@@ -92,7 +107,7 @@
                     border-radius: 50%;
                     width: 60px;
                     height: 60px;
-                    font-size:40px;
+                    font-size: 40px;
                     color: white;
                     border: none;
                     cursor: pointer;
@@ -119,6 +134,9 @@
                     }
                 }
             }
+
+
+           
         }
         span {
             text-align: start;
@@ -130,22 +148,51 @@
                 color: var(--vinho);
             }
         }
+
+        .makePDFButton{
+            height: 45px;
+            padding: 5px;
+            border: 1px solid white;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+            background-color: var(--vinho);
+            filter: saturate(1.5);
+            
+
+       
+
+            img{
+                height: 35px;
+                width: 30px;
+           
+                filter: invert(1);
+
+               
+            }
+            &:hover{
+                transform: scale(1.2);
+             }
+        }
+    
+    
     }
 }
 
 @media screen and (max-width: 700px) {
-    
-
     .list-request {
         .CardRequest {
-            div {
+            
+            #description-item {
+                width: 100%;
                 border-radius: 40px;
-      
+
                 p {
                     font-size: 18px;
                 }
 
-                #image-product{
+                #image-product {
                     border-radius: 40px;
                 }
 
@@ -183,8 +230,6 @@
         .CardRequest {
             div {
                 width: 35vw;
-
-
             }
         }
     }
