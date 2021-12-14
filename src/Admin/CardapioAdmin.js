@@ -18,6 +18,7 @@ import { ModelEdit } from "./ModelEdit";
 import { ModelADD } from "./ModelADD";
 
 
+
 export function Cardapio() {
 
     const Cardapio = useSelector(state => state.cardapio)
@@ -131,77 +132,75 @@ export function Cardapio() {
 
 
             <div className="menu-bar"></div>
-            <section className="list">
+            <div className="content-list">
+                <section className="list">
 
-                <div className="bar">
-                    <button onClick={() => setModelADD(true)}>+</button>
-                    <Link to="/adminpikeno"><img src={Home}></img></Link>
-                </div>
+                    <div className="bar">
+                        <button onClick={() => setModelADD(true)}>+</button>
+                        <Link to="/adminpikeno"><img src={Home}></img></Link>
+                    </div>
 
-                {Cardapio.map((item, index) => {
-                    if (item.falseItem) {
-                        return
-                    }
-                    return (
-                        <>
-                            <div key={index} className="card">
-                                <img src={item.img} alt={item.name}></img>
-                                <img src={item.type}></img>
-                                <div className="name">{item.name}____<span>{handleValue(item.value)}</span> </div>
+                    {Cardapio.map((item, index) => {
+                        if (item.falseItem) {
+                            return
+                        }
+                        return (
+                            <>
+                                <div key={index} className="card">
+                                    <img src={item.img} alt={item.name}></img>
+                                    <img src={item.type}></img>
+                                    <div className="name">{item.name}____<span>{handleValue(item.value)}</span> </div>
 
-                                <ul>
-                                    {item.desc.map((items, id) => {
+                                    <ul>
+                                        {item.desc.map((items, id) => {
 
-                                        return (<li key={id}>{items}</li>)
-                                    })}
-                                </ul>
+                                            return (<li key={id}>{items}</li>)
+                                        })}
+                                    </ul>
 
-                                <div className="content-options">
-                                    <div onClick={() => parseItemCardapio(item)} className="edit">EDITAR</div >
-                                    <div className="delete" onClick={() => deleteItem(item)}>Excluir</div>
+                                    <div className="content-options">
+                                        <div onClick={() => parseItemCardapio(item)} className="edit">EDITAR</div >
+                                        <div className="delete" onClick={() => deleteItem(item)}>Excluir</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </>
-                    )
-                })
-                }
+                            </>
+                        )
+                    })
+                    }
 
-            </section>
+                </section>
 
-            <div className="content-ofertas">
+                <div className="content-ofertas">
 
-                <div className="ofertas">
-                    <h1>OFERTAS</h1>
-                    <select id="type-oferta">
-                        <option>
-                            hamburgueres
-                        </option>
-                        <option>
-                            batatas
-                        </option>
-                        <option>
-                            bebidas
-                        </option>
-                        <option>
-                            combos
-                        </option>
-                        <option>
-                            doces
-                        </option>
-                        <option>
-                            hamburgueres
-                        </option>
-                    </select>
+                    <div className="ofertas">
+                        <h1>Ofertas</h1>
+                        <select id="type-oferta">
+                            <option>
+                                hamburgueres
+                            </option>
+                            <option>
+                                batatas
+                            </option>
+                            <option>
+                                bebidas
+                            </option>
+                            <option>
+                                combos
+                            </option>
+                            <option>
+                                doces
+                            </option>
+                
+                        </select>
 
-                    <input id="name-product" placeholder="nome do produto" type="text">
-                    </input>
-                    <input id="new-value" placeholder="valor promocional" type="number">
-                    </input>
-                    <button onClick={registerOferta}>Enviar</button>
+                        <input id="name-product" placeholder="nome do produto" type="text">
+                        </input>
+                        <input id="new-value" placeholder="valor promocional" type="number">
+                        </input>
+                        <button onClick={registerOferta}>Enviar</button>
+                    </div>
                 </div>
             </div>
-
-
 
             {modelEdit ? <ModelEdit item={itemEdit} setModelEdit={setModelEdit} /> : ""}
             {modelADD ? <ModelADD setModelADD={setModelADD}></ModelADD> : ""}

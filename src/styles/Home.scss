@@ -402,6 +402,14 @@
 }
 
 @media screen and (max-width: 510px) {
+    .cardapio{
+        
+    #backgroundHamburguer,
+    #backgroundBatatas,
+    #backgroundCebolas {
+        width: 11rem;
+    }
+    }
     .ofertas {
         display: flex;
         flex-direction: column;
@@ -422,6 +430,8 @@
             }
             ul {
                 font-size: 8vw;
+                margin-left: -10rem;
+                margin-bottom: 1rem;
             }
             button {
                 font-size: 10vw;

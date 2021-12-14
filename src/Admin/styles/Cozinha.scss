@@ -1,0 +1,31 @@
+.content-cozinha {
+    header {
+        height: 32vh;
+        div {
+            display: none;
+        }
+        background-color: var(--preto-cinza);
+
+        img{
+            width: 15rem;
+        }
+
+        
+    }
+    .logout{
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background-color: var(--vinho);
+        width: 5rem;
+        border: none;
+        padding: 1rem;
+        border-radius: 1rem;
+        font-size: 1.4rem;
+        cursor: pointer;
+        transition: transform 0.2s;
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
+}

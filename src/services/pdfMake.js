@@ -1,6 +1,6 @@
 import pdfMake from "pdfmake/build/pdfmake"
 import pdfFonts from "pdfmake/build/vfs_fonts"
-
+import { resolve } from 'path'
 function makeNoteRequests(request) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs
 
@@ -11,26 +11,34 @@ function makeNoteRequests(request) {
     }
 
     const reportTitle = [
+
         {
             text: request.nameClient,
             fontSize: 10,
             bold: true,
-            margin: [15, 0, 0, 50]
+            margin: [15, 0,0, 15]
         },
 
     ]
     const dados = request.name.map(item => {
         return [
+
             { text: item.name, style: 'tableHeader', fontSize: 7 },
             { text: handleValue(item.value), style: 'tableHeader', fontSize: 7 },
             { text: item.quantidade, style: 'tableHeader', fontSize: 7 },
+
+
+
 
         ]
     })
 
     const details = [
-       {text:request.hour.fulltime, fontSize:8},
-       {text:request.hour, fontSize:8},
+
+
+
+        { text: request.hour.fulltime, fontSize: 8 },
+        { text: request.hour, fontSize: 8 },
         {
             table: {
                 headerRows: 1,

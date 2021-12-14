@@ -125,7 +125,7 @@ export function Home() {
         await dispatch(invocPayment({
             value,
             desc,
-            name,
+            name: {name},
             img,
             type,
             valueTotal: value

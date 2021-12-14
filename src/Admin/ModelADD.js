@@ -22,6 +22,7 @@ export function ModelADD(props) {
 
 
         if (!img) {
+    
             return alert("Não foi inserido uma imagem para o produto")
         }
         if (!name) {
@@ -71,6 +72,7 @@ export function ModelADD(props) {
 
         })
 
+
         props.setModelADD(false)
     }
 
@@ -89,24 +91,24 @@ export function ModelADD(props) {
                     <div>
                         <label>Tipo de produto:</label>
                         <select id="type-product">
-                        <option>
-                            hamburgueres
-                        </option>
-                        <option>
-                            batatas
-                        </option>
-                        <option>
-                            bebidas
-                        </option>
-                        <option>
-                            combos
-                        </option>
-                        <option>
-                            doces
-                        </option>
-                        <option>
-                            hamburgueres
-                        </option>
+                            <option>
+                                hamburgueres
+                            </option>
+                            <option>
+                                batatas
+                            </option>
+                            <option>
+                                bebidas
+                            </option>
+                            <option>
+                                combos
+                            </option>
+                            <option>
+                                doces
+                            </option>
+                            <option>
+                                hamburgueres
+                            </option>
                         </select>
                     </div>
                     <input type="text" className="name" id="name" placeholder="nome" ></input >

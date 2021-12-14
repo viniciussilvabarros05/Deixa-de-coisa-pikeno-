@@ -1,12 +1,15 @@
-import { Header } from "../components/Header"
+
 import { useDispatch } from "react-redux"
-import "../styles/Admin.scss"
+import "./styles/Admin.scss"
 import { NavLink } from "react-router-dom"
+import { RegisterUser } from "./components/registerUser"
 
-import bcrypt from "bcryptjs"
-import { db } from "../services/firebase"
-
-
+import Home from "../assets/images/Home.svg"
+import Menu from "../assets/images/Menu.svg"
+import pdf from "../assets/images/pdf.png"
+import clientes from '../assets/images/grupo.png'
+import dinheiro from '../assets/images/dinheiro.png'
+import grafico from '../assets/images/grafico.png'
 export function Admin() {
 
     const dispatch = useDispatch()
@@ -16,74 +19,174 @@ export function Admin() {
         dispatch({ type: "LOGOUT" })
     }
 
-    function registerUser() {
-        const email = document.getElementById("email").value
-        const password = document.getElementById("password").value
-        const typeUser = document.getElementById("type-user").value
-        let user = {}
 
-        if (!(email, typeUser, password)) {
-            return alert("Dados incompletos. Por farvor, preencha todos os")
-        }
-
-        if (typeUser == "admin") {
-            user = {
-                name: email,
-                email,
-                password: bcrypt.hashSync(password),
-                admin: true
-            }
-        } else {
-            user = {
-                email,
-                password: bcrypt.hashSync(password),
-                cozinha: true
-            }
-        }
-
-        db.collection("Usuarios").doc(email).set(user).then(doc => {
-            return alert("Usuário cadastrado")
-        })
-
-
-    }
 
     return (
         <div className="content-admin">
-            <Header></Header>
 
             <div className="menu-bar">
-                <NavLink activeClassName="ActivedMenu" to="/adminpikeno">Home</NavLink>
-                <NavLink activeClassName="ActivedMenu" to="/cardapio">Cardapio</NavLink>
-                <NavLink activeClassName="ActivedMenu" to="/relatorio">Relatório</NavLink>
-                <NavLink activeClassName="ActivedMenu" to="/clientes">Clientes</NavLink>
+                <NavLink activeClassName="ActivedMenu" to="/adminpikeno">
+                    <img src={Home} /> Dashboard
+                </NavLink>
+                <NavLink activeClassName="ActivedMenu" to="/cardapio">
+                    <img src={Menu} />
+                    Cardapio</NavLink>
+                <NavLink activeClassName="ActivedMenu" to="/relatorio">
+                    <img src={pdf} />
+                    Relatório</NavLink>
+                <NavLink activeClassName="ActivedMenu" to="/clientes">
+                    <img src={Home} />
+                    Clientes</NavLink>
+                <NavLink activeClassName="ActivedMenu" to="/clientes">
+                    <img src={Home} />
+                    Usuários</NavLink>
+                <NavLink activeClassName="ActivedMenu" onClick={logout} to="/clientes">
+                    <img src={Home} />
+                    Sign out</NavLink>
             </div>
 
-            <button className="logout" onClick={logout}>LOGOUT</button>
+
+            <div className="dashboard">
+
+                <div className="card-board">
+                    <div>
+                        <span>
+                            1,500
+                            <p>
+                                Total de clientes
+                            </p>
+                        </span>
+                        <img src={clientes}></img>
 
 
-            <div className="content-register">
-                <h2>CADASTRO DE USUARIOS</h2>
-                <input id="email" type="text" placeholder="nome do usuário"></input>
-                <input id="password" type="password" placeholder="senha do usuário"></input>
+                    </div>
+                    <div>
+                        <span>
+                            15
+                            <p>
+                                Vendas do dia
+                            </p>
+                        </span>
+                        <img src={grafico}></img>
 
+                    </div>
+                    <div>
+                        <span>
+                            R$ 800,00
+                            <p>
+                                Total
+                            </p>
+                        </span>
+                        <img src={dinheiro}></img>
 
-                <div >
-
-                    <label>Tipo de usuário:</label>
-                    <select id="type-user">
-                        <option>
-                            admin
-                        </option>
-                        <option>
-                            cozinha
-                        </option>
-                    </select>
-
+                    </div>
                 </div>
-                <button onClick={registerUser}>CADASTRAR</button>
-            </div>
+                <div className="content-relatorio">
+                    <div className="relatorio">
+                        <h1>Relatório do dia</h1>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Valor</th>
+                                    <th>Pagamento</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Invocado</td>
+                                    <td>R$18,00</td>
+                                    <td>Pago</td>
+                                    <td>Entregue</td>
+                                </tr>
+                                <tr>
+                                    <td>Invocado</td>
+                                    <td>R$18,00</td>
+                                    <td>Pago</td>
+                                    <td>Entregue</td>
+                                </tr>
+                                <tr>
+                                    <td>Invocado</td>
+                                    <td>R$18,00</td>
+                                    <td>Pago</td>
+                                    <td>Entregue</td>
+                                </tr>
+                                <tr>
+                                    <td>Invocado</td>
+                                    <td>R$18,00</td>
+                                    <td>Pago</td>
+                                    <td>Entregue</td>
+                                </tr>
+                                <tr>
+                                    <td>Invocado</td>
+                                    <td>R$18,00</td>
+                                    <td>Pago</td>
+                                    <td>Entregue</td>
+                                </tr>
+                                <tr>
+                                    <td>Invocado</td>
+                                    <td>R$18,00</td>
+                                    <td>Pago</td>
+                                    <td>Entregue</td>
+                                </tr>
+                                <tr>
+                                    <td>Invocado</td>
+                                    <td>R$18,00</td>
+                                    <td>Pago</td>
+                                    <td>Entregue</td>
+                                </tr>
+                                <tr>
+                                    <td>Invocado</td>
+                                    <td>R$18,00</td>
+                                    <td>Pago</td>
+                                    <td>Entregue</td>
+                                </tr>
+                                <tr>
+                                    <td>Invocado</td>
+                                    <td>R$18,00</td>
+                                    <td>Pago</td>
+                                    <td>Entregue</td>
+                                </tr>
 
+                            </tbody>
+                        </table>
+                   
+                    </div>
+
+                    <div className="ranking">
+                        <h1>Mais saídos</h1>
+                        <ul>
+                            <li>
+                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
+                                Invocado
+                            </li>
+                            <li>
+                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
+                                Tem como não
+                            </li>
+                            <li>
+                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
+                                Bolo
+                            </li>
+                            <li>
+                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
+                                invocado, combo
+                            </li>
+                            <li>
+                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
+                                Brocado
+                            </li>
+                            <li>
+                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
+                                Invocado
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
     )

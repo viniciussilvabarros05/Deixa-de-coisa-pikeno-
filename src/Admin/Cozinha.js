@@ -1,9 +1,9 @@
 import { Header } from "../components/Header"
 import { useDispatch, useSelector } from "react-redux"
 import { CardRequest } from "../components/CardRequest";
-import "../styles/Pedidos.scss"
+import "./styles/Cozinha.scss"
 import { db } from "../services/firebase";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 export function Cozinha() {
     const dispatch = useDispatch()
     const pedidos = useSelector(state => state.pedidos)
@@ -33,7 +33,7 @@ export function Cozinha() {
    
 
     return (
-        <div className="content-admin">
+        <div className="content-cozinha">
             <Header></Header>
             <div className="content-pedidos">
 

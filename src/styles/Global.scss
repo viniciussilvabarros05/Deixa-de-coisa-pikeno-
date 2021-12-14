@@ -14,13 +14,16 @@
     --creme: #d0c4ad;
 }
 
+
 * {
     font-family: holyfat, "sans-serif", Verdana, Geneva, Tahoma, sans-serif;
+    
 }
 
 body {
-    background: url("../assets/images/background.png") no-repeat center top;
+    background: url("../assets/images/background.svg") no-repeat center top;
     background-size: cover;
+  
 }
 p {
     font-family: intro-head, "sans-serif", Verdana;
@@ -28,7 +31,7 @@ p {
 }
 
 
-select,option, li{
+table,th,td,select,option, li{
     font-family: intro-head, "sans-serif", Verdana;
     font-size: 1.2rem;
 }
