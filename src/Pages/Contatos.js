@@ -5,14 +5,7 @@ export function Contatos(){
     return (
         <>
         <Header></Header>
-        <div>
-            <div>
-
-            </div>
-            <div>
-                
-            </div>
-        </div>
+       
         <Footer></Footer>
         </>
     )

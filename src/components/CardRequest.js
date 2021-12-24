@@ -1,4 +1,4 @@
-import { useState } from "react"
+
 import { useSelector } from "react-redux"
 import pronto from "../assets/images/direito.png"
 import panela from "../assets/images/panela-quente.png"
@@ -55,7 +55,7 @@ export function CardRequest(props) {
 
 
     return (
-        <div className="list-request">
+        <div className={`list-request ${props.item.RequestStatus == "received" ? "" : props.item.RequestStatus == "ready" ? "ready" : "cooking"}`}>
 
             <div className={`CardRequest ${props.item.RequestStatus == "received" ? "" : props.item.RequestStatus == "ready" ? "ready" : "cooking"}`}>
 

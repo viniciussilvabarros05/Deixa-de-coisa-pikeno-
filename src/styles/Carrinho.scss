@@ -1,27 +1,81 @@
 .content-cart {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-top: 100px;
-    height: 100vh;
-    width: 100%;
+    justify-content: center;
+    margin: auto;
+    background-color: var(--vinho);
+    margin-top: 20px;
+    height: 100%;
+    width: 60%;
+    padding: 2.4rem;
+    vertical-align: inherit;
+    vertical-align: inherit;
+    border-radius: 12% 88% 15% 85% / 69% 19% 81% 31%;
     gap: 2px;
+    flex-wrap: wrap;
+
+    .message-not-requests {
+        height: 20vh;
+        display: flex;
+        width: 80%;
+        margin: auto;
+       
+        align-items: center;
+        h1 {
+            margin: auto;
+            width: 70%;
+            background-color: var(--vinho);
+            padding: 2rem;
+            color: white;
+            font-family: intro-head;
+            border-radius: 86% 14% 30% 70% / 33% 33% 67% 67%;
+        }
+    }
 
     .cart-card {
-        width: 70%;
+        display: flex;
+        margin: auto;
+
         min-width: 300px;
         .nameProduct {
             display: flex;
+            box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.3);
+            border: 5px solid var(--vinho);
+            flex-direction: column;
+            justify-content: center;
+            height: 26rem;
+            width: 18rem;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 15px 0 0;
-            background-color: var(--vinho);
+
+            background-color: rgb(238, 238, 238);
             border-radius: 15px;
-            color: white;
+            color: black;
+
+         
+
+            .content-image {
+                width: 90%;
+
+                img {
+                    margin: 0 auto;
+                    margin-bottom: 3rem;
+                    width: 95%;
+                    height: 150px;
+                }
+            }
             span,
             p {
-                padding: 15px;
-                width: 90px;
+                background-image: linear-gradient(
+                    to right,
+                    rgb(238, 238, 238),
+                    rgb(240, 215, 182),
+                    var(--mostarda),
+                    rgb(240, 215, 182),
+                    rgb(238, 238, 238)
+                );
+                margin-bottom: 0.1rem;
+                width: 100%;
+                font-family: intro-head;
             }
             font-size: 25px;
             > div {
@@ -40,7 +94,8 @@
                     transition: transform 0.3s;
 
                     &:first-child {
-                        background-color: var(--mostarda);
+                        margin-top: 0.2rem;
+                        background-color: var(--vinho);
                         color: white;
                     }
                     &:hover {
@@ -50,49 +105,92 @@
             }
         }
     }
-
-    .content-button-confirm {
-        margin-top: 5px;
-        position: relative;
-        border-radius: 0 5rem 5rem 0;
-        background-color: var(--mostarda);
-        span {
-            display: inline-block;
-            padding: 15px;
-            font-family: intro-head;
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            left: -40px;
-            border-width: 20px 40px 20px;
-            line-height: 0;
-            border-style: solid;
-            border-color: var(--mostarda) transparent var(--mostarda) transparent;
-            height: 20%;
-            width: 0;
-        }
+}
+.content-button-confirm {
+    max-width: 210px;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+    position: relative;
+    border-radius: 0 5rem 5rem 0;
+    background-color: var(--mostarda);
+    span {
+        display: inline-block;
+        padding: 15px;
+        font-family: intro-head;
     }
 
-    .confirm-cart {
-        height: 50px;
-        font-size: 30px;
-        padding: 5px;
-        border: none;
-        color: white;
-        background-color: var(--preto-cinza);
-        border-radius: 15px;
-        cursor: pointer;
-        transition: filter 0.3s;
-        position: relative;
-        span {
-            background: var(--mostarda);
-            height: 100%;
-        }
+    &::before {
+        content: "";
+        position: absolute;
+        left: -40px;
+        border-width: 20px 40px 20px;
+        line-height: 0;
+        border-style: solid;
+        border-color: var(--mostarda) transparent var(--mostarda) transparent;
+        height: 20%;
+        width: 0;
+    }
+}
 
-        &:hover {
-            filter: brightness(1.5);
+.confirm-cart {
+    height: 50px;
+    font-size: 30px;
+    padding: 5px;
+    border: none;
+    color: white;
+    background-color: var(--preto-cinza);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: filter 0.3s;
+    position: relative;
+    span {
+        background: var(--mostarda);
+        height: 100%;
+    }
+
+    &:hover {
+        filter: brightness(1.5);
+    }
+}
+
+@media (max-width: 700px) {
+    .content-cart {
+        height: 100vh;
+        width: 90%;
+     
+        padding: 0;
+        .cart-card {
+            .nameProduct {
+                display: flex;
+                padding: 0.25rem;
+                width: 100%;
+                max-height: 5rem;
+                flex-direction: row;
+                span,
+                p {
+                    font-size: 0.8rem;
+                    background-image: none;
+                    width: 80px;
+                    padding: 0;
+                    margin: 0;
+                }
+                .content-image {
+                    width: 150px;
+                    height: 100%;
+                    img {
+                        margin: 0 auto;
+                        padding: 0;
+
+                        width: 90%;
+                        height: 90%;
+                        object-fit: contain;
+                    }
+                }
+            }
         }
+    }
+    .content-button-confirm {
+        width: 210px;
     }
 }

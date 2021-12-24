@@ -7,7 +7,9 @@ import { useEffect } from "react";
 export function Cozinha() {
     const dispatch = useDispatch()
     const pedidos = useSelector(state => state.pedidos)
+    const admin = useSelector(state=>state.admin)
 
+    console.log(admin)
 
     function logout() {
         localStorage.setItem("adminLog", JSON.stringify(''))

@@ -22,7 +22,7 @@ export function Header() {
                 </div>
 
             </div>
-            <img src={Logo} />
+            <a href='/'> <img src={Logo} /></a>
 
 
         </header>

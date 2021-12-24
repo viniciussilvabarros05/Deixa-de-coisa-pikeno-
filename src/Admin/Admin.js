@@ -10,37 +10,73 @@ import pdf from "../assets/images/pdf.png"
 import clientes from '../assets/images/grupo.png'
 import dinheiro from '../assets/images/dinheiro.png'
 import grafico from '../assets/images/grafico.png'
+import { useState } from "react"
+import Swal from "sweetalert2"
 export function Admin() {
 
     const dispatch = useDispatch()
+    const [menuLateral, setMenuLateral] = useState(false)
 
     function logout() {
         localStorage.setItem("adminLog", JSON.stringify(''))
         dispatch({ type: "LOGOUT" })
     }
 
+    function sendEmail() {
+    
 
+        try {
+            fetch("http://localhost:3000/api/sendemail")
+                .then(response => console.log(response))
+                .then(data => {
+                    return Swal.fire({
+                        title: 'Email enviado',
+                        icon: 'success'
+                    })
+
+                })
+        } catch (err) {
+            if (err) {
+                console.log(err.message)
+            }
+        }
+
+    }
 
     return (
         <div className="content-admin">
+            <div className="menu-hamburguer"
+                onClick={() => setMenuLateral(true)}
+            >
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+            </div>
 
-            <div className="menu-bar">
-                <NavLink activeClassName="ActivedMenu" to="/adminpikeno">
+            <div className={`menu-bar ${menuLateral ? "menuExposed" : "menuhiddenADM"}`}>
+                <div className="menu-hamburguer"
+                    onClick={() => setMenuLateral(false)}>
+                    <div className="line"></div>
+                    <div className="line"></div>
+                    <div className="line"></div>
+                </div>
+
+                <NavLink activeClassName="ActiveMenuADM" to="/adminpikeno">
                     <img src={Home} /> Dashboard
                 </NavLink>
-                <NavLink activeClassName="ActivedMenu" to="/cardapio">
+                <NavLink activeClassName="ActiveMenuADM" to="/cardapio">
                     <img src={Menu} />
                     Cardapio</NavLink>
-                <NavLink activeClassName="ActivedMenu" to="/relatorio">
+                <NavLink activeClassName="ActiveMenuADM" onClick={sendEmail} to="#">
                     <img src={pdf} />
                     Relatório</NavLink>
-                <NavLink activeClassName="ActivedMenu" to="/clientes">
-                    <img src={Home} />
+                <NavLink activeClassName="ActiveMenuADM" to=" ">
+                    <img src={clientes} />
                     Clientes</NavLink>
-                <NavLink activeClassName="ActivedMenu" to="/clientes">
+                <NavLink activeClassName="ActiveMenuADM" to=" ">
                     <img src={Home} />
                     Usuários</NavLink>
-                <NavLink activeClassName="ActivedMenu" onClick={logout} to="/clientes">
+                <NavLink activeClassName="ActiveMenuADM" onClick={logout} to=" ">
                     <img src={Home} />
                     Sign out</NavLink>
             </div>
@@ -50,7 +86,7 @@ export function Admin() {
 
                 <div className="card-board">
                     <div>
-                        <span>
+                        <span  >
                             1,500
                             <p>
                                 Total de clientes
@@ -151,7 +187,7 @@ export function Admin() {
 
                             </tbody>
                         </table>
-                   
+
                     </div>
 
                     <div className="ranking">

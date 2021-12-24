@@ -83,18 +83,7 @@ export function Carrinho() {
 
 
 
-                <div className="cart-card">
-
-                    <div className="nameProduct">
-                        <span>Quantidade</span>
-                        <span>Pedido</span>
-                        <span>Valor</span>
-                        <div>___</div>
-                    </div>
-
-                </div>
-
-                {carrinho.map((item, index) => {
+                {carrinho.length == 0? <div className="message-not-requests"><h1>Ops.. Seu carrinho está vazio</h1></div>:carrinho.map((item, index) => {
 
                     valueTotalCart = carrinho.reduce((acc, value) => {
                         return (acc + value.value)
@@ -104,7 +93,10 @@ export function Carrinho() {
                         <div className="cart-card">
 
                             <div className="nameProduct">
-                                <span>{item.quant}</span>
+
+                                <div className="content-image"> <img src={item.img}></img></div>
+                                <span>Quantidade:  {item.quant}</span>
+
                                 <p>{item.name.name ? item.name.name : item.name}</p>
                                 <span>{handleValue(item.value)}</span>
                                 <div>
@@ -117,16 +109,17 @@ export function Carrinho() {
                         </div>
                     )
                 })}
-                {carrinho.length !== 0 ?
-                    <div className="content-button-confirm">
-                        <span>TOTAL: {handleValue(valueTotalCart)}</span>
-                        < button className="confirm-cart" onClick={ConfirmItem}>
 
-                            Confirmar
-
-                        </button>
-                    </div> : ""}
             </div>
+            {carrinho.length !== 0 ?
+                <div className="content-button-confirm">
+                    <span>TOTAL: {handleValue(valueTotalCart)}</span>
+                    < button className="confirm-cart" onClick={ConfirmItem}>
+
+                        Confirmar
+
+                    </button>
+                </div> : ""}
 
         </>
     )

@@ -2,30 +2,59 @@
     0% {
         box-shadow: 1px 1px 5px 5px rgba($color: #b81313ce, $alpha: 0.3);
     }
+
     100% {
-        box-shadow: 1px 1px 15px 10px rgba($color: #b81313ce, $alpha: 0.6);
+       transform: rotate(360deg);
     }
 }
 @keyframes ready {
     0% {
-        box-shadow: 1px 1px 5px 5px rgba($color: #65e654ce, $alpha: 0.3);
+        border: 4px solid #65e654ce;
     }
     100% {
-        box-shadow: 1px 1px 30px 20px rgba($color: #65e654ce, $alpha: 0.6);
+        border: 4px solid #65e654ce;
+        box-shadow: 1px 1px 5px 3px rgba($color: #65e654ce, $alpha: 0.3);
     }
 }
 
-
+.message-not-requests {
+    height: 50vh;
+    display: flex;
+    width: 80%;
+    margin: auto;
+   
+    align-items: center;
+    h1 {
+        margin: auto;
+        width: 70%;
+        background-color: var(--vinho);
+        padding: 2rem;
+        color: white;
+        font-family: intro-head;
+        border-radius: 86% 14% 30% 70% / 33% 33% 67% 67%;
+    }
+}
 
 .content-pedidos {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    height: 100%;
+
+ 
 }
 .cooking {
-    > div {
-        animation: cooking 1.5s infinite forwards alternate;
+    .CardRequest::before{
+        content:"";
+        width: 200vw;
+        height: 100%;
+        position: absolute;
+        background: conic-gradient(rgba(255, 255, 255, 0), var(--vinho));
+        transition: 1s ease;
+        animation: cooking 2s ease infinite  ;
+      
+        
     }
 }
 .ready {
@@ -34,19 +63,31 @@
     }
 }
 
+
+
+
 .list-request {
     display: flex;
     align-items: center;
+   
     justify-content: center;
     padding: 50px;
-    width: 100%;
+    width: 60%;
+  
+    
 
     .CardRequest {
+        border-radius: 5rem;
+        background-color: var(--creme);
         display: flex;
         justify-content: center;
         position: relative;
-        width: 80%;
-
+        width: 100%;
+        padding: 0.1rem;
+     
+        overflow: hidden;
+      
+     
         h3 {
             font-size: 50px;
             background-color: var(--preto-cinza);
@@ -54,22 +95,14 @@
             width: 100px;
             border-radius: 50px;
         }
-
-        .subtitle{
-            background-color: var(--preto-cinza);
-            width: 9rem;
-            font-size: 25px;
-            margin-left: 15px;
-            padding: 4px;
-            border-radius: 15px;
-            color:white;
-        }
         #description-item {
+            z-index: 1;
+            padding: 0.3rem;
             display: flex;
-            width: 70%;
+            width:98%;
             flex-direction: column;
             gap: 10px;
-            min-width: 180px;
+            min-width: 250px;
             background-color: var(--mostarda);
             border-radius: 4vw;
 
@@ -93,6 +126,16 @@
                 color: var(--preto-cinza);
             }
 
+        .subtitle {
+            background-color: var(--preto-cinza);
+            width: 9rem;
+            font-size: 25px;
+            margin-left: 15px;
+            padding: 4px;
+            border-radius: 15px;
+            color: white;
+        }
+       
             .content-buttons {
                 margin: auto;
                 margin-bottom: 15px;
@@ -135,9 +178,6 @@
                     }
                 }
             }
-
-
-           
         }
         span {
             text-align: start;
@@ -150,7 +190,7 @@
             }
         }
 
-        .makePDFButton{
+        .makePDFButton {
             height: 45px;
             padding: 5px;
             border: 1px solid white;
@@ -160,34 +200,30 @@
             transition: transform 0.3s;
             background-color: var(--vinho);
             filter: saturate(1.5);
-            
 
-       
-
-            img{
+            img {
                 height: 35px;
                 width: 30px;
-           
-                filter: invert(1);
 
-               
+                filter: invert(1);
             }
-            &:hover{
+            &:hover {
                 transform: scale(1.2);
-             }
+            }
         }
-    
-    
     }
 }
 
 @media screen and (max-width: 700px) {
     .list-request {
+        width: 100%;
+
         .CardRequest {
-            
+            border-radius: 1.5rem;
             #description-item {
-                width: 100%;
-                border-radius: 40px;
+
+               
+                border-radius: 20px;
 
                 p {
                     font-size: 18px;

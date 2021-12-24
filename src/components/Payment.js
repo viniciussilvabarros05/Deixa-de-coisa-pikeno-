@@ -10,14 +10,16 @@ import swal from "sweetalert2"
 
 
 
+
 export function PaymentView(props) {
 
     const payment = useSelector(state => { return state.payment })
-
-    const carrinho = useSelector(state => state.carrinho)
     const [quant, setQuant] = useState(1)
     const [nameStorage, setNameStorage] = useState('')
+    const admin = useSelector(state => state.admin)
+    const [nameClientAdm, setClientAdm] = useState(' ')
     const dispatch = useDispatch()
+
 
     useEffect(() => {
 
@@ -47,10 +49,10 @@ export function PaymentView(props) {
         let minutes = time.getMinutes()
         let seconds = time.getSeconds()
         let mili = time.getMilliseconds()
-        let fulltimeMinutes = (hour * 60 * 60) + (minutes*60) + seconds
-        return { time: fulltimeMinutes, fulltime: `${hour}:${minutes}:${seconds}:${mili}` }
+        let fulltimeSeconds = (hour * 60 * 60) + (minutes * 60) + seconds
+        return { time: fulltimeSeconds, fulltime: `${hour}:${minutes}:${seconds}:${mili}` }
     }
-  
+
 
     function pushRequest(event) {
         event.preventDefault()
@@ -88,7 +90,10 @@ export function PaymentView(props) {
 
         db.collection("Pedidos").add(request).then(() => {
             props.setPayment(false)
+
+
             saveName(nameClient)
+
             return swal.fire({
                 title: "Pedido Enviado",
                 icon: "success"
@@ -131,18 +136,46 @@ export function PaymentView(props) {
         }
 
         dispatch({ type: "ADDCART", payload: request })
+
+
+        saveName(nameClient)
+
+
         props.setPayment(false)
     }
 
     function saveName(name) {
-        localStorage.setItem("nameClient", JSON.stringify(name))
-
+        if (!admin) {
+            localStorage.setItem("nameClient", JSON.stringify(name))
+        } else {
+            localStorage.setItem("nameClient", JSON.stringify(''))
+        }
     }
 
     useEffect(() => {
+
         const nameClientSaved = JSON.parse(localStorage.getItem("nameClient"))
-        setNameStorage(nameClientSaved)
-    }, [payment])
+        if(!admin){
+            if (nameClientSaved) {
+    
+                setNameStorage(nameClientSaved)
+            }
+        }else{
+            setNameStorage(nameClientAdm)
+        }
+     
+
+    
+
+    }, [])
+
+    useEffect(() => {
+        let savedAdm = JSON.parse(localStorage.getItem("adminLog"))
+        if (savedAdm) {
+            dispatch({ type: "LOGIN", payload: savedAdm })
+        }
+
+    }, [])
 
 
     return (
@@ -167,7 +200,7 @@ export function PaymentView(props) {
 
                 <form>
                     <img src={Logo}></img>
-                    {nameStorage ? <p id="name-client" value={nameStorage} placeholder="nome completo"></p> : <input id="name-client" placeholder="nome completo"></input>}
+                    {nameStorage ? <p id="name-client" value={nameStorage} placeholder="nome completo"></p> : <input id="name-client" onChange={(event)=>setClientAdm(event.target.value)} placeholder="nome completo" ></input>}
 
                     <div>
                         <label>Forma de pagamento:</label>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+    <style>
+        .esconder{
+            display:none;
+            width: 50%;
+            margin: auto;
+            text-align: center;
+            font-family: sans-serif;
+            margin-top: 0.5rem;
+            border-radius: 0.4rem;
+            padding: 0.8rem;
+            color: white;
+            background-color: rgb(237, 87, 87);
+        }
+        main{
+        width: 60%;
+        margin: auto;
+    }
+    </style>
+    <main>
+        <script type="text/javascript" id="scr_61bcfd699208c200097652bf">var s=document.createElement("script");s.src="https://cdn.converteai.net/828793a6-9a9a-4332-9be8-23f1d1c2c55c/players/61bcfd699208c200097652bf/player.js",s.async=!0,document.head.appendChild(s);</script>
+    </main>
+
+    <div class = "esconder"><h1 >Teste do script</h1></div>
+
+
+
+    <script type="text/javascript">
+        /* ALTERE O VALOR DAS VARIAVEIS ABAIXO */
+        var SECONDS_TO_DISPLAY = 5;
+        var CLASS_TO_DISPLAY = ".esconder";
+      
+        /* DAQUI PARA BAIXO NAO PRECISA ALTERAR */
+        var elsHiddenList = [];
+        var elsDisplayed = false;
+        var elsHidden = document.querySelectorAll(CLASS_TO_DISPLAY);
+        var alreadyElsDisplayed = localStorage.getItem('alreadyElsDisplayed')
+      
+        setTimeout(() => { elsHiddenList = Array.prototype.slice.call(elsHidden); }, 0);
+        
+        var showEls = () => {
+          elsDisplayed = true;
+          elsHiddenList.forEach((e)=> e.style.display = "block");
+          localStorage.setItem('alreadyElsDisplayed', true)
+        }
+      
+        var startWatchVideoProgress = () => {
+          if (typeof smartplayer === 'undefined') {
+            return setTimeout(() => { startWatchVideoProgress() }, 500);
+          }
+      
+          smartplayer.instances[0].on('timeupdate', ()=> {
+            if (elsDisplayed || smartplayer.instances[0].video.currentTime < SECONDS_TO_DISPLAY) return;
+            showEls();
+          })
+        }
+      
+        if (alreadyElsDisplayed === 'true') {
+          setTimeout(() => { showEls(); }, 100);
+        } else {
+          startWatchVideoProgress()
+        }
+      </script>
+</body>
+</html>

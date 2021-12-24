@@ -1,7 +1,61 @@
+@keyframes cardapio {
+    0% {
+        left: 0;
+    }
+    50% {
+        left: 100vw;
+        opacity: 0;
+    }
+    75% {
+        left: -200vw;
+        opacity: 0;
+    }
+
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes menuLateral {
+    0% {
+        left: -250px;
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        left: 0;
+        position: fixed;
+    }
+}
+@keyframes menuLateralback {
+    0% {
+        left: 0;
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        left: -1250px;
+    }
+}
+.ActiveMenuADM {
+    background-color: var(--mostarda);
+}
+
+.menuExposed {
+    animation: menuLateral 0.3s linear 1 forwards;
+}
+.menuhiddenADM {
+    animation: menuLateralback 1s linear 1 forwards;
+    visibility: hidden;
+}
+
 .content-admin {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     height: 100vh;
     background-color: rgb(246, 250, 250);
 
@@ -9,18 +63,66 @@
         background-color: var(--mostarda);
         box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.3);
     }
+    > .menu-hamburguer {
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        left: 15px;
+        top: 10px;
+        cursor: pointer;
+
+        div {
+            height: 3px;
+            margin: 8px;
+            background-color: var(--vinho);
+            width: 30px;
+        }
+
+        &:hover {
+            div {
+                filter: saturate(1.8);
+                background-color: var(--mostarda);
+            }
+        }
+    }
 
     .menu-bar {
         display: flex;
+        position: fixed;
+        z-index: 1;
+        top: 0;
 
         align-items: center;
         padding-top: 10rem;
         justify-content: flex-start;
         flex-direction: column;
-        min-width: 340px;
+        width: 300px;
 
         height: 100%;
         background-color: var(--vinho);
+        transition: visibility 0.4s;
+        .menu-hamburguer {
+            height: 50px;
+            width: 50px;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            cursor: pointer;
+
+            div {
+                height: 3px;
+                margin: 8px;
+                background-color: white;
+                width: 30px;
+            }
+
+            &:hover {
+                div {
+                    filter: saturate(1.8);
+                    background-color: var(--mostarda);
+                }
+            }
+        }
 
         a {
             margin-left: 2rem;
@@ -249,18 +351,42 @@
 }
 
 @media (max-width: 1440px) {
-    * {
-        font-size: 70%;
-    }
     .content-admin {
-        .menu-bar {
-            width: -500px;
-        }
+        height: 100%;
+        font-size: 70%;
+
         .dashboard {
+            margin-top: 10rem;
             .card-board {
                 div:nth-child(3) {
                     span {
                         font-size: 2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 700px) {
+    .content-admin {
+        .menu-bar {
+            width: 200px;
+        }
+
+        .dashboard {
+            .relatorio {
+                table {
+                    width: 110%;
+                    tbody {
+                        tr {
+                            text-align: start;
+                        
+    
+                            td {
+                                font-size: 1rem;
+                            }
+                         
+                        }
                     }
                 }
             }

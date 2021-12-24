@@ -36,7 +36,8 @@ export function Pedidos() {
             <Header></Header>
             <div className="content-pedidos">
 
-                {pedidos.map((item, index) => {
+               
+                {pedidos.length ==0 ? <div  className="message-not-requests" ><h1>Ops.. Você não possui pedidos</h1></div>:pedidos.map((item, index) => {
                     return (<CardRequest item={item} key={index}></CardRequest>)
                 })}
 

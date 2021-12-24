@@ -6,26 +6,33 @@
         }
         background-color: var(--preto-cinza);
 
-        img{
+        img {
             width: 15rem;
         }
-
-        
     }
-    .logout{
+    .logout {
         position: absolute;
         top: 1rem;
         right: 1rem;
         background-color: var(--vinho);
-        width: 5rem;
+    
         border: none;
         padding: 1rem;
         border-radius: 1rem;
         font-size: 1.4rem;
         cursor: pointer;
         transition: transform 0.2s;
-        &:hover{
+        &:hover {
             transform: scale(1.2);
         }
     }
+}
+
+@media (max-width: 700px) {
+    .content-cozinha{
+        .logout {
+            font-size: 1rem;
+        }
+    }
+    
 }

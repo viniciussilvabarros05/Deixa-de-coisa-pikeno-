@@ -56,21 +56,26 @@ function App() {
 
             <Route path="/pedidos">
               <Pedidos />
+              <MenuLateral></MenuLateral>
             </Route>
             <Route path="/carrinho">
               <Carrinho />
+              <MenuLateral></MenuLateral>
             </Route>
 
             <Route path="/sobre">
               <Sobre></Sobre>
+              <MenuLateral></MenuLateral>
             </Route>
 
             <Route path="/contatos">
               <Contatos></Contatos>
+              <MenuLateral></MenuLateral>
             </Route>
 
             <Route exact path="/">
               <Home />
+              <MenuLateral></MenuLateral>
             </Route>
 
             <PrivateRouter path="/adminpikeno">
@@ -94,16 +99,18 @@ function App() {
 
             <Route exact path="/login">
               <Login />
+              <MenuLateral></MenuLateral>
             </Route>
 
             <Route path="*">
               <Home />
+              <MenuLateral></MenuLateral>
             </Route>
 
 
 
           </Switch>
-          <MenuLateral></MenuLateral>
+       
 
         </BrowserRouter>
 
