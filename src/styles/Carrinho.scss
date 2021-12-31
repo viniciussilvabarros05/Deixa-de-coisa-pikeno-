@@ -15,7 +15,7 @@
     flex-wrap: wrap;
 
     .message-not-requests {
-        height: 20vh;
+    height:20vh;
         display: flex;
         width: 80%;
         margin: auto;
@@ -155,8 +155,13 @@
 }
 
 @media (max-width: 700px) {
+
+ body{
+     height:100%
+ }
     .content-cart {
-        height: 100vh;
+        min-height:300px;
+
         width: 90%;
      
         padding: 0;

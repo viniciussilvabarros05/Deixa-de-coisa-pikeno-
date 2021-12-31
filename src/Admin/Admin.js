@@ -1,6 +1,6 @@
+import "./styles/Admin.scss"
 
 import { useDispatch } from "react-redux"
-import "./styles/Admin.scss"
 import { NavLink } from "react-router-dom"
 import { RegisterUser } from "./components/registerUser"
 
@@ -10,12 +10,18 @@ import pdf from "../assets/images/pdf.png"
 import clientes from '../assets/images/grupo.png'
 import dinheiro from '../assets/images/dinheiro.png'
 import grafico from '../assets/images/grafico.png'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Swal from "sweetalert2"
-export function Admin() {
+import { db, storage } from "../services/firebase"
 
+
+
+export function Admin() {
+    const ref = storage.ref('/relatorio')
     const dispatch = useDispatch()
     const [menuLateral, setMenuLateral] = useState(false)
+    const [relatorio, setRelatorio] = useState([])
+    const [maisSaidos, setMaisSaidos] = useState([])
 
     function logout() {
         localStorage.setItem("adminLog", JSON.stringify(''))
@@ -23,25 +29,109 @@ export function Admin() {
     }
 
     function sendEmail() {
-    
 
         try {
-            fetch("http://localhost:3000/api/sendemail")
-                .then(response => console.log(response))
-                .then(data => {
-                    return Swal.fire({
-                        title: 'Email enviado',
-                        icon: 'success'
-                    })
 
+            const filePath = ref.child("relatório.pdf").getDownloadURL().then(url => {
+                fetch('/api/sendemail', {
+                    method: 'POST',
+                    body: JSON.stringify(url),
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Access-Control-Allow-Methods": "*"
+                    },
+                }).then(response => {
+                    console.log(response)
+
+                }).then(data => {
+                    Swal.fire({ title: "Email enviado com sucesso", icon: 'success' })
                 })
-        } catch (err) {
-            if (err) {
-                console.log(err.message)
+            })
+
+        } catch (error) {
+            if (error) {
+                Swal.fire({ title: error, icon: 'error' })
             }
+
         }
 
+
+
     }
+    function sumAllLucros() {
+        const AllLucros = relatorio.reduce((acumulator, atual) => {
+            return acumulator + atual.value
+        }, 0)
+
+        return AllLucros
+    }
+
+    function sumAllVendas() {
+        const allVendas = relatorio.reduce((acumulator, atual) => {
+
+
+            return acumulator + atual.name.length
+        }, 0)
+
+        return allVendas
+    }
+    function handleValue(value = 0) {
+
+        return value.toLocaleString("pt-br", { style: "currency", currency: "brl" })
+
+    }
+    useEffect(() => {
+
+        let QuantidadeSaidos = []
+        relatorio.forEach(data => {
+            data.name.map((item, index) => {
+
+                let checkExist = QuantidadeSaidos.filter(exist => exist.item.name === item.name)
+
+                if (checkExist.length > 0) {
+                    checkExist.forEach(checkItem => {
+                        QuantidadeSaidos.forEach(QuantItem => {
+                            if (checkItem.item.name === QuantItem.item.name) {
+                                QuantItem.item.quantidade += checkItem.item.quantidade
+                            }
+                        })
+    
+                      
+                    })
+
+                    return
+                }
+                QuantidadeSaidos.push({ item, img: data.img })
+            })
+        })
+
+        QuantidadeSaidos.sort((a,b)=>{
+            if(a.item.quantidade> b.item.quantidade){
+                return -1
+            }else{
+                return 1
+            }
+        })
+        console.log(QuantidadeSaidos)
+        setMaisSaidos(QuantidadeSaidos)
+    }, [relatorio])
+
+    useEffect(() => {
+
+        const unsubscribe = db.collection('Relatorio').onSnapshot(snapshot => {
+            const arrayRelatorio = []
+            snapshot.forEach(item => {
+                arrayRelatorio.push(item.data())
+            })
+
+            setRelatorio(arrayRelatorio)
+            console.log('oi')
+        })
+
+        return () => {
+            unsubscribe()
+        }
+    }, [])
 
     return (
         <div className="content-admin">
@@ -67,9 +157,9 @@ export function Admin() {
                 <NavLink activeClassName="ActiveMenuADM" to="/cardapio">
                     <img src={Menu} />
                     Cardapio</NavLink>
-                <NavLink activeClassName="ActiveMenuADM" onClick={sendEmail} to="#">
+                <a onClick={sendEmail} href="#">
                     <img src={pdf} />
-                    Relatório</NavLink>
+                    Relatório</a>
                 <NavLink activeClassName="ActiveMenuADM" to=" ">
                     <img src={clientes} />
                     Clientes</NavLink>
@@ -87,7 +177,7 @@ export function Admin() {
                 <div className="card-board">
                     <div>
                         <span  >
-                            1,500
+                            {relatorio.length}
                             <p>
                                 Total de clientes
                             </p>
@@ -98,7 +188,7 @@ export function Admin() {
                     </div>
                     <div>
                         <span>
-                            15
+                            {sumAllVendas()}
                             <p>
                                 Vendas do dia
                             </p>
@@ -108,7 +198,7 @@ export function Admin() {
                     </div>
                     <div>
                         <span>
-                            R$ 800,00
+                            {handleValue(sumAllLucros())}
                             <p>
                                 Total
                             </p>
@@ -122,7 +212,9 @@ export function Admin() {
                         <h1>Relatório do dia</h1>
                         <table>
                             <thead>
+
                                 <tr>
+                                    <th>Cliente</th>
                                     <th>Nome</th>
                                     <th>Valor</th>
                                     <th>Pagamento</th>
@@ -130,61 +222,22 @@ export function Admin() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Invocado</td>
-                                    <td>R$18,00</td>
-                                    <td>Pago</td>
-                                    <td>Entregue</td>
-                                </tr>
-                                <tr>
-                                    <td>Invocado</td>
-                                    <td>R$18,00</td>
-                                    <td>Pago</td>
-                                    <td>Entregue</td>
-                                </tr>
-                                <tr>
-                                    <td>Invocado</td>
-                                    <td>R$18,00</td>
-                                    <td>Pago</td>
-                                    <td>Entregue</td>
-                                </tr>
-                                <tr>
-                                    <td>Invocado</td>
-                                    <td>R$18,00</td>
-                                    <td>Pago</td>
-                                    <td>Entregue</td>
-                                </tr>
-                                <tr>
-                                    <td>Invocado</td>
-                                    <td>R$18,00</td>
-                                    <td>Pago</td>
-                                    <td>Entregue</td>
-                                </tr>
-                                <tr>
-                                    <td>Invocado</td>
-                                    <td>R$18,00</td>
-                                    <td>Pago</td>
-                                    <td>Entregue</td>
-                                </tr>
-                                <tr>
-                                    <td>Invocado</td>
-                                    <td>R$18,00</td>
-                                    <td>Pago</td>
-                                    <td>Entregue</td>
-                                </tr>
-                                <tr>
-                                    <td>Invocado</td>
-                                    <td>R$18,00</td>
-                                    <td>Pago</td>
-                                    <td>Entregue</td>
-                                </tr>
-                                <tr>
-                                    <td>Invocado</td>
-                                    <td>R$18,00</td>
-                                    <td>Pago</td>
-                                    <td>Entregue</td>
-                                </tr>
+                                {relatorio.map((item, index) => {
 
+                                    return (
+
+                                        <tr key={item.hour}>
+                                            <td>{item.nameClient}</td>
+                                            <td>{item.name[0] ? item.name.map(data => {
+                                                return (<p key={item.hour} >{data.name}, </p>)
+                                            }) : item.name.name}</td>
+                                            <td>{handleValue(item.value)}</td>
+                                            <td>{item.pg}</td>
+                                            <td>{item.RequestStatus}</td>
+                                        </tr>
+
+                                    )
+                                })}
                             </tbody>
                         </table>
 
@@ -193,31 +246,12 @@ export function Admin() {
                     <div className="ranking">
                         <h1>Mais saídos</h1>
                         <ul>
-                            <li>
-                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
-                                Invocado
-                            </li>
-                            <li>
-                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
-                                Tem como não
-                            </li>
-                            <li>
-                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
-                                Bolo
-                            </li>
-                            <li>
-                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
-                                invocado, combo
-                            </li>
-                            <li>
-                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
-                                Brocado
-                            </li>
-                            <li>
-                                <img src="https://firebasestorage.googleapis.com/v0/b/deixa-de-coisa-pikeno.appspot.com/o/Images%2Finvocado.jpeg?alt=media&token=7fbe0b46-a848-45c8-9eb8-7851db1650fc"></img>
-                                Invocado
-                            </li>
-
+                            {maisSaidos.map(item => {
+                                return (<li>
+                                    <img src={item.img? item.img: item.item.img}></img>
+                                    {item.item.name}
+                                </li>)
+                            })}
                         </ul>
                     </div>
                 </div>

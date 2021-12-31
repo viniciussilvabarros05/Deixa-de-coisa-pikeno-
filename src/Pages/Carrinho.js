@@ -42,7 +42,7 @@ export function Carrinho() {
             some = some + parseFloat(item.value)
             quant = quant + parseInt(item.quant)
             console.log(item)
-            names.push({ name: item.name.name, quantidade: item.quant, value: item.value })
+            names.push({ name: item.name.name, quantidade: item.quant, value: item.value, img:item.img})
         })
 
 
@@ -54,6 +54,7 @@ export function Carrinho() {
             RequestStatus: carrinho[0].RequestStatus,
             quant: quant,
             hour: carrinho[0].hour,
+            pg:"Em aberto",
             time: time()
 
         }
@@ -65,6 +66,10 @@ export function Carrinho() {
                 icon: "success"
 
             })
+        })
+        db.collection("Relatorio").add(RequestFromCart).then(() => {
+
+           console.log('success')
         })
 
         dispatch({ type: "ADDCART", payload: [] })

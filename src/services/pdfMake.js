@@ -1,7 +1,9 @@
 import pdfMake from "pdfmake/build/pdfmake"
 import pdfFonts from "pdfmake/build/vfs_fonts"
-import { resolve } from 'path'
-function makeNoteRequests(request) {
+
+ function makeNoteRequests(request) {
+
+  
     pdfMake.vfs = pdfFonts.pdfMake.vfs
 
     function handleValue(value = 0) {
@@ -16,7 +18,7 @@ function makeNoteRequests(request) {
             text: request.nameClient,
             fontSize: 10,
             bold: true,
-            margin: [15, 0,0, 15]
+            margin: [15, 0, 0, 15]
         },
 
     ]
@@ -84,7 +86,15 @@ function makeNoteRequests(request) {
         footer: Rodape,
     }
 
-    pdfMake.createPdf(docDefinitions).download()
+
+   
+    pdfMake.createPdf(docDefinitions).open();
+
+   
+}
+
+function makeRelatorio(data){
+
 }
 
 export default makeNoteRequests

@@ -4,7 +4,7 @@ import pronto from "../assets/images/direito.png"
 import panela from "../assets/images/panela-quente.png"
 import { db } from "../services/firebase"
 import pdfImg from "../assets/images/pdf.png"
-import makeNoteRequests from "../services/pdfMake"
+import  makeNoteRequests  from "../services/pdfMake"
 
 export function CardRequest(props) {
     const admin = useSelector(state => state.admin)
@@ -47,6 +47,7 @@ export function CardRequest(props) {
         }
 
     }
+    
     function handleValue(value = 0) {
 
         return value.toLocaleString("pt-br", { style: "currency", currency: "brl" })
@@ -57,7 +58,7 @@ export function CardRequest(props) {
     return (
         <div className={`list-request ${props.item.RequestStatus == "received" ? "" : props.item.RequestStatus == "ready" ? "ready" : "cooking"}`}>
 
-            <div className={`CardRequest ${props.item.RequestStatus == "received" ? "" : props.item.RequestStatus == "ready" ? "ready" : "cooking"}`}>
+            <div className="CardRequest">
 
                 <div id="description-item">
                     {admin ? <h3>{props.order + 1}</h3> : ""}
@@ -92,7 +93,7 @@ export function CardRequest(props) {
                 </div>
                 {admin ? <button className="makePDFButton" onClick={() => makeNoteRequests(props.item)}>
                     <img src={pdfImg} alt="gerar nota "></img>
-                
+
                 </button> : ""}
 
             </div>

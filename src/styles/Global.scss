@@ -18,17 +18,16 @@ html::-webkit-scrollbar-thumb {
     border-radius: 15px;
 }
 html::-webkit-scrollbar {
-    background-color:var(--preto-cinza);
+    background-color: var(--preto-cinza);
     width: 8px;
 }
 * {
-    font-family: holyfat, "sans-serif", Verdana, Geneva, Tahoma, sans-serif;
+    font-family:  holyfat,intro-head, "sans-serif", Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
     background: url("../assets/images/background.svg") no-repeat center top;
     background-size: cover;
-    
 }
 
 p {

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { db } from "../services/firebase"
 import swal from "sweetalert2"
+import Swal from "sweetalert2"
 
 
 
@@ -17,7 +18,7 @@ export function PaymentView(props) {
     const [quant, setQuant] = useState(1)
     const [nameStorage, setNameStorage] = useState('')
     const admin = useSelector(state => state.admin)
-    const [nameClientAdm, setClientAdm] = useState(' ')
+    const [nameClientAdm, setClientAdm] = useState('undefined')
     const dispatch = useDispatch()
 
 
@@ -84,6 +85,7 @@ export function PaymentView(props) {
             img: payment.img,
             value: payment.valueTotal,
             quant: quant,
+            pg: 'Em aberto',
             RequestStatus: "received",
 
         }
@@ -101,10 +103,16 @@ export function PaymentView(props) {
             })
         })
 
+        db.collection("Relatorio").add(request).then(() => {
+            console.log('success')
+        })
+
     }
 
     function pushCart(event) {
         event.preventDefault()
+
+
 
         let nameClient = document.getElementById("name-client").value
         const typePayment = document.getElementById("type-payment").value
@@ -122,6 +130,7 @@ export function PaymentView(props) {
             }
         }
 
+
         const request = {
             name: payment.name,
             hour: time(),
@@ -137,7 +146,6 @@ export function PaymentView(props) {
 
         dispatch({ type: "ADDCART", payload: request })
 
-
         saveName(nameClient)
 
 
@@ -145,31 +153,24 @@ export function PaymentView(props) {
     }
 
     function saveName(name) {
-        if (!admin) {
-            localStorage.setItem("nameClient", JSON.stringify(name))
-        } else {
-            localStorage.setItem("nameClient", JSON.stringify(''))
-        }
+
+        localStorage.setItem("nameClient", JSON.stringify(name))
+
     }
 
     useEffect(() => {
 
         const nameClientSaved = JSON.parse(localStorage.getItem("nameClient"))
-        if(!admin){
-            if (nameClientSaved) {
-    
-                setNameStorage(nameClientSaved)
-            }
-        }else{
-            setNameStorage(nameClientAdm)
-        }
-     
 
-    
+        if (nameClientSaved) {
+            setNameStorage(nameClientSaved)
+        }
 
     }, [])
 
     useEffect(() => {
+
+
         let savedAdm = JSON.parse(localStorage.getItem("adminLog"))
         if (savedAdm) {
             dispatch({ type: "LOGIN", payload: savedAdm })
@@ -200,7 +201,7 @@ export function PaymentView(props) {
 
                 <form>
                     <img src={Logo}></img>
-                    {nameStorage ? <p id="name-client" value={nameStorage} placeholder="nome completo"></p> : <input id="name-client" onChange={(event)=>setClientAdm(event.target.value)} placeholder="nome completo" ></input>}
+                    {nameStorage ? <p id="name-client" value={nameClientAdm} inputlaceholder="nome completo"></p> : <input id="name-client" placeholder="nome completo" ></input>}
 
                     <div>
                         <label>Forma de pagamento:</label>
@@ -213,6 +214,11 @@ export function PaymentView(props) {
 
                     <button onClick={pushRequest}>FAZER PEDIDO</button>
                     <button className="add-cart" onClick={pushCart}>ADICIONAR AO CARRINHO</button>
+                    {admin? <button onClick={(event) => {
+                        event.preventDefault()
+                        setNameStorage('')
+                        localStorage.setItem("nameClient", JSON.stringify(''))
+                    }}> RESETAR</button>: ''}
                     <div onClick={() => props.setPayment(false)} className="button-cancel">CANCELAR</div>
 
                 </form>

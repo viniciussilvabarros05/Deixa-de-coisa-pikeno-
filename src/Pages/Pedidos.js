@@ -16,10 +16,11 @@ export function Pedidos() {
         const unsubscribe = db.collection("Pedidos").where("nameClient", "==", name).onSnapshot((snapshot) => {
 
             const requestDB = []
-            
             snapshot.forEach(item => {
                 requestDB.push(item.data())
             })
+
+    
 
             dispatch({ type: "REQUEST", payload: requestDB })
           
