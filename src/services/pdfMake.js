@@ -29,9 +29,6 @@ import pdfFonts from "pdfmake/build/vfs_fonts"
             { text: handleValue(item.value), style: 'tableHeader', fontSize: 7 },
             { text: item.quantidade, style: 'tableHeader', fontSize: 7 },
 
-
-
-
         ]
     })
 
